@@ -1,2 +1,2 @@
 # BookingApp
-## Third Year Software Architecture Project
+Third Year Software Architecture Project
