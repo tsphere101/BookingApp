@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
-        <h1>Aloha hotel</h1>
+        <Navbar/>
+        <button className = "btn btn-primary">bootstrap button</button>
     </div>
   );
 }
