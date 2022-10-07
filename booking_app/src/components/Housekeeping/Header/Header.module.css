@@ -1,0 +1,32 @@
+.flex-box{
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+
+#t1{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0px 0px;
+    padding-right: 1rem;
+    border-right: 2px solid black;
+    text-transform: uppercase;
+}
+
+#t2{
+    font-size: 1.2rem;
+    margin: 0px 0px;
+    padding: .7rem 0 1rem 1rem;
+    color: #551A8B;
+    text-decoration: none;
+}
+
+#t2:hover{
+    text-decoration: underline;
+}
+
+#t2:active{
+    color: rgb(37,111,42);
+}
+
+
