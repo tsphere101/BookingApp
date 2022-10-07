@@ -3,6 +3,7 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const router = require('./router.js')
+const { json } = require('express')
 
 dotenv.config()
 
@@ -21,7 +22,10 @@ app.get('/',(req,res)=>{
     res.send('Hello world')
 })
 
+app.use(express.json())
+
 app.use('/api',router)
+
 
 
 module.exports = app
