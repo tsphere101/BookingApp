@@ -1,34 +1,26 @@
-.container {
+.modebar {
   display: flex;
   flex-direction: row;
-  margin: 0 2rem 1rem 2rem;
+  margin: 0px 2rem;
+  border-bottom: 2px solid #484848;
+  height: 44px;
 }
 
-.modebar{
-    display: flex;
+.modeBtn{
+  background-color: transparent;
+  height: 20px;
 }
 
-input{
-    display: none;
+.modeBtn label{
+ color: black;
 }
 
-label{
-    display: block;
-    width: auto;
-    height: 3rem;
-    padding: 0 1rem;
-    transition: 500ms;
+.modeBtn input[type='radio']:hover + label{
+  color: black;
+  background-color: #d3d3d3;
 }
 
-label p{
-    font-size: 16px;
-}
-
-label:hover:not(.active){
-    background-color: #dddd;
-}
-
-input[type="radio"]:checked+label {
-    background-color:#F08882;
-    transition-timing-function: ease-in-out;
+.modeBtn input[type='radio']:checked + label{
+  color: white;
+  background-color: #484848;
 }

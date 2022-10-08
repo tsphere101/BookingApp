@@ -17,16 +17,9 @@
     font-size: 1.2rem;
     margin: 0px 0px;
     padding: .7rem 0 1rem 1rem;
-    color: #551A8B;
+    color: #D4990D;
     text-decoration: none;
-}
-
-#t2:hover{
-    text-decoration: underline;
-}
-
-#t2:active{
-    color: rgb(37,111,42);
+    font-weight: bold;
 }
 
 

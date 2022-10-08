@@ -1,0 +1,28 @@
+.navRadio{
+  display: flex;
+  height: 1.7rem;
+}
+
+.navRadio input[type="radio"] {
+  display: none;
+}
+
+.navRadio label {
+  display: block;
+  padding: 12px 12px;
+  font-size: 1rem;
+  color: white;
+  text-transform: uppercase;
+  height: 100%;
+  transition: 300ms;
+}
+
+.navRadio input[type="radio"]:hover + label {
+  background-color: #333333;
+  transition: 300ms cubic-bezier(1, 0, 0, 1);
+}
+
+.navRadio input[type="radio"]:checked + label {
+  background-color: #d4990d;
+  transition: 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
