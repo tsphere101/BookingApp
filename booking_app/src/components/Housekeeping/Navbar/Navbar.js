@@ -17,9 +17,9 @@ const Navbar = () => {
           <BedIcon style={{ color: "#fff" }} />
         </div>
 
-        <RadioButton title='home' group='nav' current={page} onClick={setPage}/>
-        <RadioButton title='someth1' group='nav' current={page} onClick={setPage}/>
-        <RadioButton title='someth2' group='nav' current={page} onClick={setPage}/>
+        <RadioButton className={styles.navItem} title='home' group='nav' current={page} onClick={setPage}/>
+        <RadioButton className={styles.navItem} title='someth1' group='nav' current={page} onClick={setPage}/>
+        <RadioButton className={styles.navItem} title='someth2' group='nav' current={page} onClick={setPage}/>
 
       </div>
       <div className="dumb box don't delete this" style={{ flexGrow: 1 }}></div>

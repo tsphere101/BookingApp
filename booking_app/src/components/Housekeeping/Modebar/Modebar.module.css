@@ -13,6 +13,7 @@
 
 .modeBtn label{
  color: black;
+ border-radius:20% 20% 0% 0%;
 }
 
 .modeBtn input[type='radio']:hover + label{

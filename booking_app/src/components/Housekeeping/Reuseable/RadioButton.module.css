@@ -20,6 +20,8 @@
 .navRadio input[type="radio"]:hover + label {
   background-color: #333333;
   transition: 300ms cubic-bezier(1, 0, 0, 1);
+  transform: scale(1.1);
+  z-index: 1;
 }
 
 .navRadio input[type="radio"]:checked + label {
