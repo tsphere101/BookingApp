@@ -1,0 +1,53 @@
+.filterbar{
+    margin: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.hiddenBox{
+    padding: 2rem;
+    border: 2px solid #F8F6F8;
+    box-shadow: 3px 3px 2px #888888;
+}
+
+.actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.filterbar_label{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: #F8F6F8;
+    height: 35px;
+    padding: 0 1rem;
+    box-shadow: 3px 3px 2px #888888;
+    border-radius: 3px;
+    flex-direction: row;
+}
+
+.filterbar_label p{
+    margin: auto .5rem;
+    user-select: none;
+}
+
+.selectBox{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 4rem;
+}
+
+.arrow{
+    transition: 200ms;
+}
+
+.active{
+    transform: rotate(180deg);
+}
+
