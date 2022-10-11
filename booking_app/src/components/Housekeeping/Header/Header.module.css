@@ -12,6 +12,7 @@
     border-left: 10px solid black;
     text-transform: uppercase;
     z-index: 1;
+    user-select: none;
 }
 
 #t2{
@@ -22,6 +23,7 @@
     text-decoration: none;
     font-weight: bold;
     z-index: 1;
+    user-select: none;
 }
 
 #aestheticbox{

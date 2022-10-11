@@ -23,6 +23,8 @@
 
 .navItem input[type='radio'] + label{
   border-radius: 20% 0% 20% 0;
+  user-select: none;
+  margin-left: .2rem;
 }
 
 .navItem input[type='radio']:checked + label{

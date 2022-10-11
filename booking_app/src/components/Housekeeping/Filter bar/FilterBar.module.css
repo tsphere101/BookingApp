@@ -5,9 +5,10 @@
 }
 
 .hiddenBox{
-    padding: 2rem;
-    border: 2px solid #F8F6F8;
+    padding: 0;
+    border: 2px solid #888888;
     box-shadow: 3px 3px 2px #888888;
+    height: fit-content;
 }
 
 .actions{
@@ -15,6 +16,14 @@
     flex-direction: row;
     justify-content: flex-end;
     gap: 1rem;
+    padding: 1rem;
+}
+
+.actions button{
+    min-width: 100px;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: none;
 }
 
 .filterbar_label{
@@ -23,12 +32,14 @@
     font-size: 15px;
     font-weight: 600;
     text-transform: uppercase;
-    background-color: #F8F6F8;
+    background-color: #484848;
     height: 35px;
     padding: 0 1rem;
     box-shadow: 3px 3px 2px #888888;
     border-radius: 3px;
     flex-direction: row;
+    z-index: 1;
+    color: white;
 }
 
 .filterbar_label p{
@@ -36,11 +47,32 @@
     user-select: none;
 }
 
-.selectBox{
+.Allselect{
     display:flex;
     flex-direction: row;
     justify-content: flex-start;
     gap: 4rem;
+    padding: 1rem;
+}
+
+.select{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 5px;
+}
+
+.select select{
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.select label{
+    font-size: 16px;
+    user-select: none;
 }
 
 .arrow{

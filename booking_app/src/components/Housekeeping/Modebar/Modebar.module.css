@@ -14,6 +14,7 @@
 .modeBtn label{
  color: black;
  border-radius:20% 20% 0% 0%;
+ user-select: none;
 }
 
 .modeBtn input[type='radio']:hover + label{
