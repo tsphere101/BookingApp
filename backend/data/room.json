@@ -1,0 +1,24 @@
+[
+    {
+        "roomName": null,
+        "roomNumber": 1101,
+        "bedType": "Single",
+        "bedAmoung": 2,
+        "pricePerPerson": 1500
+    },
+    {
+        "roomName": null,
+        "roomNumber": 1102,
+        "bedType": "Single",
+        "bedAmoung": 2,
+        "pricePerPerson": 1500
+    },
+    {
+        "roomName": null,
+        "roomNumber": 1103,
+        "bedType": "Double",
+        "bedAmoung": 2,
+        "pricePerPerson": 2000
+    }
+
+]

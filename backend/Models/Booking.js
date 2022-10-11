@@ -1,3 +1,4 @@
+const { number } = require('joi');
 const mongoose = require('mongoose');
 
 const BookingSchema = new mongoose.Schema({
@@ -5,6 +6,7 @@ const BookingSchema = new mongoose.Schema({
     lname: {type:String},
     email: {type:String},
     birthDate: {type:Date},
+    phone: {type:number},
     guest: [{
         name: {type:String},
         gender: {type:String}
@@ -15,8 +17,9 @@ const BookingSchema = new mongoose.Schema({
     checkOut_date:{type:Date},
     isCheckIn_date: {type:Date,default: null},
     pricePerPerson: {type:Number},
+    discout: {type:Number},
     totalPrice:{type:Number},
-    book_date: {tpye:Date}
+    book_date: {type:Date}
     // payment: {
 
     // }
