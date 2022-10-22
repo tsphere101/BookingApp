@@ -18,6 +18,7 @@
   "homepage": "https://github.com/tsphere101/BookingApp#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "mongoose": "^6.6.4",
     "nodemon": "^2.0.20"
   }
 }
