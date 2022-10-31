@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 import { Request,Response} from "express"
 import { Employee } from "../Employee"
 // const Employee = require('./schema/EmployeeSchem')
-const Employees = require('./schema/EmployeeSchema')
+const Employees = require('../schema/EmployeeSchema')
 
 class Registor{
     static async registor(obj:Employee ){
