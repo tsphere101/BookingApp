@@ -11,22 +11,21 @@ const port = process.env.PORT;
 
 console.log(process.env.PORT)
 
+app.use(express.json())
+
 app.listen(3000, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
 });
 
 app.get('/', (req: Request, res: Response) => {
+  console.log("Hello")
   res.send('Express + TypeScript Server');
 });
 
 
 
-// dotenv.config()
-
-// const app = express()
 app.use(cors())
 
-// const url = "mongodb+srv://martha:M0aO2dmGzM2PmUFS@cluster0.xsrtsub.mongodb.net/Chandra?retryWrites=true&w=majority"
 mongoose.connect(process.env.DB_URI)
 .then(console.log("Connect to database sucessfully"))
 .catch((err:any)=>{console.log(err)})
@@ -37,4 +36,4 @@ app.use('/api',router)
 
 
 
-// module.exports = app
+module.exports = app

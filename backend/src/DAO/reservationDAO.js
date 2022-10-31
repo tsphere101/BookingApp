@@ -3,7 +3,7 @@ const Booking = require('../Models/Booking.js')
 const Room = require('../Models/Room.js')
 const Reservation = require('../Models/Booking')
 
-const requestClientRoomChecker = require('../checker.js')
+const requestClientRoomChecker = require('../Middleware/checker.js')
 
 class ReservationClass{
 
