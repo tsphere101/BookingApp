@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 import { Schema, model} from 'mongoose';
-import { IEmployee } from './Iemployee';
+import { IEmployee } from './IEmployee';
 
 const Employees = new Schema<IEmployee>({
     "username": {type:String,default: null},
