@@ -1,24 +1,44 @@
 [
+    
     {
-        "roomName": null,
+        "roomName": "Superior Room",
         "roomNumber": 1101,
-        "bedType": "Single",
-        "bedAmoung": 2,
-        "pricePerPerson": 1500
+        "bedType": "King",
+        "bedAmoung": 3,
+        "pricePerPerson": {
+            "no_breakfast": 1590,
+            "breakfast": 1890
+        }
     },
     {
-        "roomName": null,
+        "roomName": "Deluxe Room",
         "roomNumber": 1102,
-        "bedType": "Single",
-        "bedAmoung": 2,
-        "pricePerPerson": 1500
+        "bedType": "Twin",
+        "bedAmoung": 3,
+        "pricePerPerson": {
+            "no_breakfast": 1590,
+            "breakfast": 1890
+        }
     },
     {
-        "roomName": null,
+        "roomName": "Beach House",
         "roomNumber": 1103,
-        "bedType": "Double",
+        "bedType": "King",
         "bedAmoung": 2,
-        "pricePerPerson": 2000
+        "pricePerPerson": {
+            "no_breakfast": 3990,
+            "breakfast": 4590
+        }
+    },
+    {
+        "roomName": "Family Premium",
+        "roomNumber": 1103,
+        "bedType": "Single Twin",
+        "bedAmoung": 4,
+        "pricePerPerson": {
+            "no_breakfast": 11990,
+            "breakfast": 16890
+        }
     }
 
 ]

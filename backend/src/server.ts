@@ -22,8 +22,13 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
 });
 
+app.get('/cat/:name', (req: Request, res: Response) => {
+  console.log(req.params)
+  res.send('Express + TypeScript Server');
+});
 
 
+// http://localhost:3000/api/booking?fname=Chinakit
 app.use(cors())
 
 mongoose.connect(process.env.DB_URI)
