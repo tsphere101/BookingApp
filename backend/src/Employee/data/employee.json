@@ -1,0 +1,19 @@
+[
+    {
+        "username": "Parnzaza",
+        "fname": "Chanachidra",
+        "lname": "Dee",
+        "email": "Chanachidra@gmail.com",
+        "password": "Dek123",
+        "role": "housekeeper"
+    },
+    {
+        "username": "Sinzaza",
+        "fname": "Sin'sName",
+        "lname": "Dee",
+        "email": "sin@gmail.com",
+        "password": "Dek123",
+        "role": "housekeeper"
+    }
+
+]

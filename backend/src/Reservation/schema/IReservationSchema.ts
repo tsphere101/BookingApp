@@ -2,13 +2,18 @@
 import { Types } from "mongoose"
 import { IGuest } from "./IGuest"
 
-export interface IReservation{
+export interface IReservationSchema{
+    prefix:string
     fname: string
     lname: string
     email: string
-    birthDate: Date
     phone: string
-    guest: Types.DocumentArray<IGuest>
+    address: string
+    addition: string
+    guest: {
+        adult: number
+        child: number
+    }
     roomNumber: string
     checkIn_date: Date
     isCheckIn: boolean

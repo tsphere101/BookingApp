@@ -1,0 +1,42 @@
+import { model } from "mongoose"
+import { EmployeeSchema } from ..
+import {Request} from 'express'
+
+req => FController => EmployeeRegistor
+
+
+
+EmployeeRegistor
+    static registor(req:Request){
+        const employee = new Employee()
+
+        employee.registor()
+    }
+
+log
+
+
+
+
+
+class Employee{
+    private fname: string
+    private lname: stirng
+    constructor()
+
+    async registor(){
+        try {
+            EmployeeModel = new model(EmployeeSchema,"Employee")
+            const employeeModel = new EmployeeModel({
+                "fname": this.fname
+                .re
+            })
+
+            const employeeAdded = await employeeModel.save()
+            return employeeAdded
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+}

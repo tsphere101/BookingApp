@@ -1,7 +1,7 @@
 [
     
     {
-        "roomName": "Superior Room",
+        "roomName": "Superior",
         "roomNumber": 1101,
         "bedType": "King",
         "bedAmoung": 3,
@@ -11,7 +11,7 @@
         }
     },
     {
-        "roomName": "Deluxe Room",
+        "roomName": "Deluxe",
         "roomNumber": 1102,
         "bedType": "Twin",
         "bedAmoung": 3,
@@ -21,7 +21,7 @@
         }
     },
     {
-        "roomName": "Beach House",
+        "roomName": "Beach",
         "roomNumber": 1103,
         "bedType": "King",
         "bedAmoung": 2,
@@ -31,7 +31,7 @@
         }
     },
     {
-        "roomName": "Family Premium",
+        "roomName": "Family",
         "roomNumber": 1103,
         "bedType": "Single Twin",
         "bedAmoung": 4,

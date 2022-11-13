@@ -9,23 +9,25 @@ class CRUDroom{
             const roomData = require('../../data/room.json')
             // console.log(roomData)
 
-            // for(let i=1 ; i < 21 ; i++){
-            //     //SUP DEL BEH FAM
-            //     const roomNum:string = "SUP" + String(i)
-            //     const addRoom = new Rooms({
-            //         roomName: roomData[0].roomName,
-            //         roomNumber: roomNum,
-            //         bed_type: roomData[0].bed_type,
-            //         guest_amoung: roomData[0].bedAmoung,
-            //         pricePerPerson_no_breakfast: roomData[0].pricePerPerson.no_breakfast,
-            //         pricePerPerson_with_breakfast: roomData[0].pricePerPerson.breakfast,
-            //         reservation: []
-            //     })
+            for(let i=1 ; i < 4 ; i++){
+                //21
+                //SUP DEL BEH FAM
+                const roomNum:string = "SUP" + String(i)
+                const addRoom = new Rooms({
+                    roomName: roomData[0].roomName,
+                    roomNumber: roomNum,
+                    bed_type: roomData[0].bed_type,
+                    guest_amoung: roomData[0].bedAmoung,
+                    pricePerPerson_no_breakfast: roomData[0].pricePerPerson.no_breakfast,
+                    pricePerPerson_with_breakfast: roomData[0].pricePerPerson.breakfast,
+                    reservation: []
+                })
 
-            //     addRoom.save()
-            // }
+                await addRoom.save()
+            }
 
-            for(let i=1 ; i < 11 ; i++){
+            for(let i=1 ; i < 3 ; i++){
+                //11
                 const roomNum:string = "DEL" + String(i)
                 const addRoom = new Rooms({
                     roomName: roomData[1].roomName,
@@ -37,10 +39,11 @@ class CRUDroom{
                     reservation: []
                 })
 
-                addRoom.save()
+                await addRoom.save()
             }
 
-            for(let i=1 ; i < 6 ; i++){
+            for(let i=1 ; i < 2 ; i++){
+                //6
                 const roomNum:string = "BEH" + String(i)
                 const addRoom = new Rooms({
                     roomName: roomData[2].roomName,
@@ -52,10 +55,11 @@ class CRUDroom{
                     reservation: []
                 })
 
-                addRoom.save()
+                await addRoom.save()
             }
 
-            for(let i=1 ; i < 6 ; i++){
+            for(let i=1 ; i < 1 ; i++){
+                //6
                 const roomNum:string = "FAM" + String(i)
                 const addRoom = new Rooms({
                     roomName: roomData[3].roomName,
@@ -67,7 +71,7 @@ class CRUDroom{
                     reservation: []
                 })
 
-                addRoom.save()
+                await addRoom.save()
             }
 
             res.status(200).send("Done")

@@ -1,37 +1,27 @@
 
 import { Schema,Types,model } from "mongoose"
-import { IReservation } from "./IReservation"
+import { IReservationSchema } from "./IReservationSchema"
 import { IGuest } from "./IGuest"
 
-// type IReservationProps = {
-//     guest: Types.DocumentArray<IGuest>
-// }
 
-// type ReservationModel = Model<IReservation,{},IReservationProps>
-
-// const ReservationModel = model
-
-
-// const reservationSchema = new Schema<IReservation>({
-    
-// })
-
-export const Reservations = new Schema<IReservation>({
-    fname: {type:String},
-    lname: {type:String},
-    email: {type:String},
-    birthDate: {type:Date},
-    phone: {type:String},
-    guest: [{
-        name: String,
-        gender: String
-    }],
+export const Reservations = new Schema<IReservationSchema>({
+    prefix: {type:String,required:true},
+    fname: {type:String,required:true},
+    lname: {type:String,required:true},
+    email: {type:String,required:true},
+    phone: {type:String,required:true},
+    address: {type:String,required:true},
+    addition: {type:String, default:"",required:false},
+    guest: {
+        adult: {type:Number,default:1},
+        child: {type:Number,default:0}
+    },
     roomNumber: {type:String,require:true},
     checkIn_date:{type:Date},
     isCheckIn: {type:Boolean,default: false},
     checkOut_date:{type:Date},
     isCheckOut: {type:Boolean,default: false},
-    pricePerPerson: {type:Number},
+    pricePerPerson: {type:Number,required:true},
     discount: {type:Number},
     totalPrice:{type:Number},
     book_date: {type:Date}
