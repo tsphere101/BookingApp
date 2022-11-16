@@ -6,6 +6,7 @@ const EmployeeFactory = require('./Employee/Controller/EmployeeFactory.ts')
 const EmployeeLogin = require('./Employee/Controller/EmployeeLogin')
 // const addReservation = require('./Reservation/controller/reservation.Controller')
 const ReservationController = require('./Reservation/controller/reservation.Controller')
+const HousekeepingController = require('./housekeeping/controller/housekeepingController')
 const CRUDroom = require('./Room/controller/CRUDroom')
 const ClientRoom = require('../src/Room/controller/clientRoom')
 import { sendEmail } from './mail/clientReservationConfirm'
@@ -27,6 +28,7 @@ router.route('/booking').post(ReservationController.addReservation)
 
 
 //Admin--------------------------------------------------------------------
+router.route('/admin/housekeepings').get(HousekeepingController.getHousekeepings)
 router.route('/admin/add_housekeepingtask')
 router.route('/admin/employee/register').post(EmployeeFactory.buildEmployee)
 router.route('/admin/employee/login').post(EmployeeLogin.login)

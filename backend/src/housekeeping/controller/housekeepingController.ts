@@ -17,11 +17,20 @@ class HousekeepingController{
     static async changeCondition(req:Request,res:Response){
         try {
             const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
-            const updateCondition = await housekeepingTaskObject?.changeCondition(req.body._id,req.body.condition)
-            res.json(updateCondition)
+            // this line has bug
+            // const updateCondition = await housekeepingTaskObject?.changeCondition(req.body._id,req.body.condition)
+            // res.json(updateCondition)
         } catch (error) {
             console.log(error)
             res.send("API error")
         }
     }
+
+    static async getHousekeepings(req:Request,res:Response) {
+        // Topfee is working on here.
+        res.json("abc") 
+    }
+
 }
+
+module.exports = HousekeepingController
