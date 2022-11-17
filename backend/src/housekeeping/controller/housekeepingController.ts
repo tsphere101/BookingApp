@@ -3,6 +3,7 @@ import { housekeepingTaskBuilder } from './housekeepingTaskBuilder'
 import { HousekeepingTaskSchema } from '../schema/housekeepingTaskSchema'
 import { IHousekeepingTask} from '../schema/IHousekeepingTask'
 import { housekeepingTaskModel } from '../class/housekeeping'
+const Employees = require('../../Employee/schema/EmployeeSchema')
 
 class HousekeepingController{
     static async addHousekeepingTask(req:Request,res:Response){
@@ -31,13 +32,26 @@ class HousekeepingController{
     }
 
     static async getHousekeepings(req:Request,res:Response) {
-        // Topfee was here.
         try {
             const housekeepings = await housekeepingTaskModel.find()
             res.json(housekeepings)
         }
         catch(error) {
             console.log(error)
+            res.send("API error")
+        }
+    }
+
+    static async getHousekeepers(req:Request,res:Response) {
+        /**
+         * Get the employee who has the role "housekeeper" from the employee table
+         */
+        try {
+            const housekeepers = await Employees.find({role:"housekeeper"}).exec()
+            res.json(housekeepers)
+        }
+        catch (error) {
+            console.log(`${error}`)
             res.send("API error")
         }
     }
