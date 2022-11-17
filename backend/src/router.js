@@ -32,6 +32,7 @@ router.route('/booking').post(ReservationController.addReservation)
 // Admin - Housekeeping
 router.route('/admin/housekeeping/tasks').get(HousekeepingController.getHousekeepingTasks)
 router.route('/admin/housekeeping/task/add').post(HousekeepingController.addHousekeepingTask)
+router.route('/admin/housekeeping/task/editComment').post(HousekeepingController.editHousekeepingTaskComment)
 router.route('/admin/housekeeping/task/delete').post(HousekeepingController.deleteHousekeepingTask)
 router.route('/admin/housekeeping/task/changeCondition').post(HousekeepingController.changeTaskCondition)
 router.route('/admin/housekeeping/housekeepers').get(HousekeepingController.getHousekeepers)

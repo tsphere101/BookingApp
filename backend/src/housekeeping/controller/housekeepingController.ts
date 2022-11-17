@@ -66,6 +66,21 @@ class HousekeepingController {
         }
     }
 
+    /**
+     * Edit the comment of the housekeeping task on the given _id 
+     */
+    static async editHousekeepingTaskComment(req: Request, res: Response) {
+        try {
+            const taskId = req.body._id
+            const newComment = req.body.comment
+            const updated = await Housekeeping.editTaskComment(taskId,newComment)
+            res.json(updated)
+        }
+        catch (error) {
+            console.log(`${error}`)
+            res.send("API error")
+        }
+    }
 
     /**
      * Delete the housekeeping task on given _id 
@@ -81,6 +96,7 @@ class HousekeepingController {
             res.send("API error")
         }
     }
+
 }
 
 module.exports = HousekeepingController

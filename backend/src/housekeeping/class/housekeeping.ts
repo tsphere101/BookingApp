@@ -86,4 +86,15 @@ export class Housekeeping{
         }
     }
 
+    static async editTaskComment(_id:string,comment:string) {
+        try {
+            const objId = new mongoose.Types.ObjectId(_id)
+            const updatedTask = await housekeepingTaskModel.updateOne({"_id":objId},{"comment":comment})
+            return updatedTask
+        } catch (error){
+            console.log(`${error}`)
+            return null
+        }
+    }
+
 }
