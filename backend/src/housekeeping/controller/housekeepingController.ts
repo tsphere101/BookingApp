@@ -26,7 +26,7 @@ class HousekeepingController {
     /**
      * Change the condition of the existed housekeeping task : ex. [Clean, Dirty] 
      */
-    static async changeCondition(req: Request, res: Response) {
+    static async changeTaskCondition(req: Request, res: Response) {
         // console.log(`changing task ${req.body._id}'s condition`)
         try {
             // const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
@@ -41,10 +41,10 @@ class HousekeepingController {
     /**
      * Get all housekeeping tasks from database.
      */
-    static async getHousekeepings(req: Request, res: Response) {
+    static async getHousekeepingTasks(req: Request, res: Response) {
         try {
-            const housekeepings = await housekeepingTaskModel.find()
-            res.json(housekeepings)
+            const housekeepingTasks = await housekeepingTaskModel.find()
+            res.json(housekeepingTasks)
         }
         catch (error) {
             console.log(error)

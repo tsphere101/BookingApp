@@ -30,10 +30,10 @@ router.route('/booking').post(ReservationController.addReservation)
 //Admin--------------------------------------------------------------------
 // 
 // Admin - Housekeeping
-router.route('/admin/housekeepings').get(HousekeepingController.getHousekeepings)
-router.route('/admin/add_housekeepingtask').post(HousekeepingController.addHousekeepingTask)
-router.route('/admin/get_housekeepers').get(HousekeepingController.getHousekeepers)
-router.route('/admin/housekeeping/changeCondition').post(HousekeepingController.changeCondition)
+router.route('/admin/housekeeping/tasks').get(HousekeepingController.getHousekeepingTasks)
+router.route('/admin/housekeeping/task/add').post(HousekeepingController.addHousekeepingTask)
+router.route('/admin/housekeeping/task/changeCondition').post(HousekeepingController.changeTaskCondition)
+router.route('/admin/housekeeping/housekeepers').get(HousekeepingController.getHousekeepers)
 // Admin - Employee
 router.route('/admin/employee/register').post(EmployeeFactory.buildEmployee)
 router.route('/admin/employee/login').post(EmployeeLogin.login)
