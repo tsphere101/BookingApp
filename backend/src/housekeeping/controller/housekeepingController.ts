@@ -5,11 +5,13 @@ import { IHousekeepingTask} from '../schema/IHousekeepingTask'
 import { housekeepingTaskModel } from '../class/housekeeping'
 
 class HousekeepingController{
-    static addHousekeepingTask(req:Request,res:Response){
+    static async addHousekeepingTask(req:Request,res:Response){
+        // console.log(`adding housekeepingtask..`)
         try {
             const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
-            const added = housekeepingTaskObject?.saveToDB()
+            const added = await housekeepingTaskObject?.saveToDB()
             res.json(added)
+            // console.log(`task ${added?._id} has been assigned to ${added?.assiged}`)
         } catch (error) {
             console.log(error)
             res.send('API error')

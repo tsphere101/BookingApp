@@ -29,7 +29,7 @@ router.route('/booking').post(ReservationController.addReservation)
 
 //Admin--------------------------------------------------------------------
 router.route('/admin/housekeepings').get(HousekeepingController.getHousekeepings)
-router.route('/admin/add_housekeepingtask')
+router.route('/admin/add_housekeepingtask').post(HousekeepingController.addHousekeepingTask)
 router.route('/admin/employee/register').post(EmployeeFactory.buildEmployee)
 router.route('/admin/employee/login').post(EmployeeLogin.login)
 

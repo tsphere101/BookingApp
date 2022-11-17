@@ -12,6 +12,6 @@ export const HousekeepingTaskSchema = new Schema<IHousekeepingTask>({
     "frontdeskStatus": {type: String,required:true},
     "assiged": {type: String,required:true},
     "doNotDisturb": {type: Boolean,required:true},
-    "comment": {tpye: String,default:""}
+    "comment": {type: String,default:""}
 })
 
