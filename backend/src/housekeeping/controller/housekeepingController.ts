@@ -65,6 +65,22 @@ class HousekeepingController {
             res.send("API error")
         }
     }
+
+
+    /**
+     * Delete the housekeeping task on given _id 
+     */
+    static async deleteHousekeepingTask(req: Request, res: Response) {
+        try {
+            const taskId = req.body._id
+            const deleted = await Housekeeping.deleteTask(taskId)
+            res.json(deleted)
+        }
+        catch (error) {
+            console.log(`${error}`)
+            res.send("API error")
+        }
+    }
 }
 
 module.exports = HousekeepingController
