@@ -72,8 +72,15 @@ export class Housekeeping{
         }
     }
 
-    static async changeRoomStatus(){
-
+    static async changeRoomStatus(_id:string,status:string){
+        try {
+            const objId = new mongoose.Types.ObjectId(_id)
+            const updatedRoom = await housekeepingTaskModel.updateOne({"_id":objId},{"roomStatus":status})
+            return updatedRoom
+        } catch (error) {
+            console.log(error)
+            return null       
+        }
     }
 
     static async deleteTask(id:string){
