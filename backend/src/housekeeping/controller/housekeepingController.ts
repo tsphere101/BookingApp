@@ -1,6 +1,8 @@
-
 import { Request,Response } from 'express'
 import { housekeepingTaskBuilder } from './housekeepingTaskBuilder'
+import { HousekeepingTaskSchema } from '../schema/housekeepingTaskSchema'
+import { IHousekeepingTask} from '../schema/IHousekeepingTask'
+import { housekeepingTaskModel } from '../class/housekeeping'
 
 class HousekeepingController{
     static addHousekeepingTask(req:Request,res:Response){
@@ -27,8 +29,15 @@ class HousekeepingController{
     }
 
     static async getHousekeepings(req:Request,res:Response) {
-        // Topfee is working on here.
-        res.json("abc") 
+        // Topfee was here.
+        try {
+            const housekeepings = await housekeepingTaskModel.find()
+            res.json(housekeepings)
+        }
+        catch(error) {
+            console.log(error)
+            res.send("API error")
+        }
     }
 
 }

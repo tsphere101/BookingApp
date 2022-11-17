@@ -1,7 +1,7 @@
 import mongoose, { model } from 'mongoose'
 import {HousekeepingTaskSchema} from '../schema/housekeepingTaskSchema'
 import {IHousekeepingTask} from '../schema/IHousekeepingTask'
-const housekeepingTaskModel = model<IHousekeepingTask>("Housekeeping",HousekeepingTaskSchema)
+export const housekeepingTaskModel = model<IHousekeepingTask>("Housekeeping",HousekeepingTaskSchema)
 
 export class Housekeeping{
     private room: string
