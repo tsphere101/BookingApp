@@ -9,6 +9,7 @@ const ReservationController = require('./Reservation/controller/reservation.Cont
 const CRUDroom = require('./Room/controller/CRUDroom')
 const ClientRoom = require('../src/Room/controller/clientRoom')
 const AdminReadReservation = require('./Reservation/controller/adminReadReservation.Controller')
+const AdminEditReservation = require('./Reservation/controller/adminEditReservation.Controller')
 import { sendEmail } from './mail/clientReservationConfirm'
 
 
@@ -33,7 +34,9 @@ router.route('/admin/employee/register').post(EmployeeFactory.buildEmployee)
 router.route('/admin/employee/login').post(EmployeeLogin.login)
 
 //Admin reservation
-router.route('/admin/reservation/read').get(AdminReadReservation.readReservation)
+router.route('/admin/reservation').get(AdminReadReservation.readReservation)
+router.route('/admin/reservation').delete(AdminEditReservation.deleteReservation)
+router.route('/admin/reservation').update(AdminEditReservation.deleteReservation)
 
 //Send Email
 router.route('/admin/sendmail').post(sendEmail)

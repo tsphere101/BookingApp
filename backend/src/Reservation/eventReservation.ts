@@ -1,4 +1,6 @@
+import { throws } from 'assert'
 import { IReservation } from './class/IReservation'
+const EventReservationModel = require('./schema/eventResevationSchema')
 
 class EventReservation implements IReservation{
     
@@ -33,7 +35,24 @@ class EventReservation implements IReservation{
         this.addition = addition
     }
 
-    async saveToDB(roomNumber: string, isCheckIn: boolean, isCheckOut: boolean, roomPrice: number, totalPrice: number) {
-        
+    async saveToDB() {
+        try {
+            const EventForAdd = await EventReservationModel({
+                prefix: this.prefix,
+                fname: this.fname,
+                lname: this.lname,
+                phone: this.phone,
+                email: this.email,
+                companyName: this.companyName,
+                country: this.country,
+                zip: this.zip,
+                addition: this.addition
+            })
+            
+            return await EventForAdd.save()
+        } catch (error) {
+            console.log(error)
+            return null
+        }
     }
 }
