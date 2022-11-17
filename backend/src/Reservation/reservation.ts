@@ -1,5 +1,5 @@
 import { IGuest } from './schema/IGuest'
-import { model } from "mongoose"
+import { model,Types } from "mongoose"
 import { IReservation } from './class/IReservation'
 import {Reservations} from "./schema/reservationSchema"
 import { IReservationSchema } from './schema/IReservationSchema'

@@ -22,6 +22,7 @@ class AdminHomeController{
                         status = "Arrival"
                     }
                     todayReser.push({
+                        "id": i._id,
                         "guest": i.fname + " " + i.lname,
                         "conf": i._id,
                         "room": i.roomNumber,
@@ -61,17 +62,17 @@ class AdminHomeController{
 
             let weekOutlook = await AdminHomeController.showWeekOutlook()
 
-            jsonWeekOutlook = []
-            for(let i of weekOutlook){
-                {
-                    "2022-10-22":{
-                        "superior": 6,
-                        "delux": 5,
-                        "beach": 2,
-                        "family":2
-                    }
-                }
-            }
+                // jsonWeekOutlook = []
+                // for(let i of weekOutlook){
+                //     {
+                //         "2022-10-22":{
+                //             "superior": 6,
+                //             "delux": 5,
+                //             "beach": 2,
+                //             "family":2
+                //         }
+                //     }
+                // }
 
             
         } catch (error) {
