@@ -36,6 +36,7 @@ router.route('/admin/housekeeping/task/editComment').post(HousekeepingController
 router.route('/admin/housekeeping/task/delete').post(HousekeepingController.deleteHousekeepingTask)
 router.route('/admin/housekeeping/task/changeCondition').post(HousekeepingController.changeTaskCondition)
 router.route('/admin/housekeeping/housekeepers').get(HousekeepingController.getHousekeepers)
+router.route('/admin/housekeeping/tasks/filter').get(HousekeepingController.getHousekeepingTasksFilter)
 // Admin - Employee
 router.route('/admin/employee/register').post(EmployeeFactory.buildEmployee)
 router.route('/admin/employee/login').post(EmployeeLogin.login)

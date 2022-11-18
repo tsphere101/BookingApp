@@ -30,7 +30,8 @@ class HousekeepingController {
         // console.log(`changing task ${req.body._id}'s condition`)
         try {
             // const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
-            const updateCondition = await Housekeeping.changeCondition(req.body._id, req.body.condition)
+            const condition = req.body.condition.toLowerCase()
+            const updateCondition = await Housekeeping.changeCondition(req.body._id, condition)
             res.json(updateCondition)
         } catch (error) {
             console.log(error)
@@ -47,6 +48,23 @@ class HousekeepingController {
             res.json(housekeepingTasks)
         }
         catch (error) {
+            console.log(error)
+            res.send("API error")
+        }
+    }
+
+    /**
+     * Filter the task based on room condition.
+     */
+    static async getHousekeepingTasksFilter(req: Request, res: Response) {
+        try {
+            let condition = req.query.condition
+            if (typeof condition==="string")
+                condition = condition.toLowerCase()
+            const housekeepingTasks = await housekeepingTaskModel.find({condition:condition})
+            res.json(housekeepingTasks)
+        }
+        catch(error) {
             console.log(error)
             res.send("API error")
         }
