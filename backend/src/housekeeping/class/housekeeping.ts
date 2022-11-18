@@ -67,6 +67,7 @@ export class Housekeeping{
         
     }
 
+
     static async changeCondition(_id:string,con:string) {
         try {
             const objId = new mongoose.Types.ObjectId(_id)

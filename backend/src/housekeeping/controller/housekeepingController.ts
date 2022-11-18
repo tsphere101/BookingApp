@@ -54,14 +54,41 @@ class HousekeepingController {
     }
 
     /**
-     * Filter the task based on room condition.
+     * Get the tasks by filter : RoomType, RoomStatus, Condition, FrontdeskStatus, AssignedEmployeeId.
      */
     static async getHousekeepingTasksFilter(req: Request, res: Response) {
         try {
-            let condition = req.query.condition
-            if (typeof condition==="string")
-                condition = condition.toLowerCase()
-            const housekeepingTasks = await housekeepingTaskModel.find({condition:condition})
+            let {type, roomStatus, condition, frontdeskStatus, employeeId} = req.query
+            
+            let filter = []
+            if (typeof type === "string") 
+                filter.push({type:type})
+            
+            if (typeof condition === "string") 
+                filter.push({condition:condition})
+
+            if (typeof roomStatus==="string")
+                filter.push({roomStatus:roomStatus})
+
+            if (typeof frontdeskStatus==="string")
+                filter.push({frontdeskStatus:frontdeskStatus})
+
+            if (typeof employeeId==="string")
+                filter.push({employeeId:employeeId})
+            
+            
+            let housekeepingTasks
+
+            if (filter.length !== 0) {
+                housekeepingTasks = await housekeepingTaskModel 
+                .find()
+                .and(filter)
+            }
+            else {
+                housekeepingTasks = await housekeepingTaskModel 
+                .find()
+            }
+
             res.json(housekeepingTasks)
         }
         catch(error) {
