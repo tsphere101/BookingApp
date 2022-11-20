@@ -1,10 +1,10 @@
 import mongoose, { model } from 'mongoose'
 import {HousekeepingTaskSchema} from '../schema/housekeepingTaskSchema'
 import {IHousekeepingTask} from '../schema/IHousekeepingTask'
-const housekeepingTaskModel = model<IHousekeepingTask>("Housekeeping",HousekeepingTaskSchema)
+export const housekeepingTaskModel = model<IHousekeepingTask>("Housekeeping",HousekeepingTaskSchema)
 
 export class Housekeeping{
-    private room: string
+    private roomNumber: string
     private type: string
     private condition: string
     private roomStatus: string
@@ -12,10 +12,12 @@ export class Housekeeping{
     private departureDate: string
     private frontdeskStatus: string
     private assiged: string
+    private employeeId : string
     private doNotDisturb: boolean
     private comment: string
 
-    constructor(room: string,
+    constructor(
+        roomNumber: string,
         type: string,
         condition: string,
         roomStatus: string,
@@ -23,9 +25,10 @@ export class Housekeeping{
         departureDate: string,
         frontdeskStatus: string,
         assiged: string,
+        employeeId : string,
         doNotDisturb: boolean,
         comment: string){
-        this.room = room
+        this.roomNumber = roomNumber
         this.type = type
         this.condition = condition
         this.roomStatus = roomStatus
@@ -33,6 +36,7 @@ export class Housekeeping{
         this.departureDate = departureDate
         this.frontdeskStatus = frontdeskStatus
         this.assiged = assiged
+        this.employeeId = employeeId
         this.doNotDisturb = doNotDisturb
         this.comment = comment
     }
@@ -41,6 +45,7 @@ export class Housekeeping{
         try {
             
             const houskeepingTask = new housekeepingTaskModel({
+                "roomNumber": this.roomNumber,
                 "type": this.type,
                 "condition": this.condition,
                 "roomStatus": this.roomStatus,
@@ -48,6 +53,7 @@ export class Housekeeping{
                 "departureDate": this.departureDate,
                 "frontdeskStatus": this.frontdeskStatus,
                 "assiged": this.assiged,
+                "employeeId": this.employeeId,
                 "doNotDisturb": this.doNotDisturb,
                 "comment": this.comment
             })
@@ -61,6 +67,7 @@ export class Housekeeping{
         
     }
 
+
     static async changeCondition(_id:string,con:string) {
         try {
             const objId = new mongoose.Types.ObjectId(_id)
@@ -72,8 +79,15 @@ export class Housekeeping{
         }
     }
 
-    static async changeRoomStatus(){
-
+    static async changeRoomStatus(_id:string,status:string){
+        try {
+            const objId = new mongoose.Types.ObjectId(_id)
+            const updatedRoom = await housekeepingTaskModel.updateOne({"_id":objId},{"roomStatus":status})
+            return updatedRoom
+        } catch (error) {
+            console.log(error)
+            return null       
+        }
     }
 
     static async deleteTask(id:string){
@@ -82,6 +96,17 @@ export class Housekeeping{
             return await housekeepingTaskModel.deleteOne({"_id": objId})
         }catch(error){
             console.log(error)
+            return null
+        }
+    }
+
+    static async editTaskComment(_id:string,comment:string) {
+        try {
+            const objId = new mongoose.Types.ObjectId(_id)
+            const updatedTask = await housekeepingTaskModel.updateOne({"_id":objId},{"comment":comment})
+            return updatedTask
+        } catch (error){
+            console.log(`${error}`)
             return null
         }
     }

@@ -6,6 +6,7 @@ const EmployeeFactory = require('./Employee/Controller/EmployeeFactory.ts')
 const EmployeeLogin = require('./Employee/Controller/EmployeeLogin')
 // const addReservation = require('./Reservation/controller/reservation.Controller')
 const ReservationController = require('./Reservation/controller/reservation.Controller')
+const HousekeepingController = require('./housekeeping/controller/housekeepingController')
 const CRUDroom = require('./Room/controller/CRUDroom')
 const ClientRoom = require('../src/Room/controller/clientRoom')
 const AdminReadReservation = require('./Reservation/controller/adminReadReservation.Controller')
@@ -31,7 +32,16 @@ router.route('/booking').post(ReservationController.addReservation)
 
 
 //Admin--------------------------------------------------------------------
-// router.route('/admin/add_housekeepingtask')
+// 
+// Admin - Housekeeping
+router.route('/admin/housekeeping/tasks').get(HousekeepingController.getHousekeepingTasks)
+router.route('/admin/housekeeping/task/add').post(HousekeepingController.addHousekeepingTask)
+router.route('/admin/housekeeping/task/editComment').post(HousekeepingController.editHousekeepingTaskComment)
+router.route('/admin/housekeeping/task/delete').post(HousekeepingController.deleteHousekeepingTask)
+router.route('/admin/housekeeping/task/changeCondition').post(HousekeepingController.changeTaskCondition)
+router.route('/admin/housekeeping/housekeepers').get(HousekeepingController.getHousekeepers)
+router.route('/admin/housekeeping/tasks/filter').get(HousekeepingController.getHousekeepingTasksFilter)
+// Admin - Employee
 router.route('/admin/employee/register').post(EmployeeFactory.buildEmployee)
 router.route('/admin/employee/login').post(EmployeeLogin.login)
 

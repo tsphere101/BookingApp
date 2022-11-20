@@ -4,6 +4,7 @@ import { Schema } from "mongoose";
 import { IHousekeepingTask } from "./IHousekeepingTask";
 
 export const HousekeepingTaskSchema = new Schema<IHousekeepingTask>({
+    "roomNumber": {type: String,required:true},
     "type": {type: String,required:true},
     "condition": {type: String,required:true},
     "roomStatus": {type: String,required:true},
@@ -11,7 +12,8 @@ export const HousekeepingTaskSchema = new Schema<IHousekeepingTask>({
     "departureDate": {type: Date,required:true},
     "frontdeskStatus": {type: String,required:true},
     "assiged": {type: String,required:true},
+    "employeeId": {type: String,required:true},
     "doNotDisturb": {type: Boolean,required:true},
-    "comment": {tpye: String,default:""}
+    "comment": {type: String,default:""}
 })
 
