@@ -1,5 +1,5 @@
 import { throws } from 'assert'
-import { IReservation } from './class/IReservation'
+import { IReservation } from './IReservation'
 const EventReservationModel = require('./schema/eventResevationSchema')
 
 class EventReservation implements IReservation{

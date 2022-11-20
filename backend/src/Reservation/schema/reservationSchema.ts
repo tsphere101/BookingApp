@@ -1,8 +1,6 @@
 
 import { Schema,Types,model } from "mongoose"
 import { IReservationSchema } from "./IReservationSchema"
-import { IGuest } from "./IGuest"
-
 
 export const Reservations = new Schema<IReservationSchema>({
     prefix: {type:String,required:true},

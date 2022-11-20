@@ -10,7 +10,7 @@ const Rooms = require('../../Room/schema/roomSchema')
 const ReservationsModel = model<IReservationSchema>("Reservations",Reservations)
 
 class AdminEditReservation{
-    async editReservation(req:Request,res:Response){
+    static async editReservation(req:Request,res:Response){
         // UPDATE method : api/admin/reservation
         try {
             // const { 
@@ -37,7 +37,7 @@ class AdminEditReservation{
         }
     }
 
-    async deleteReservation(req:Request,res:Response){
+    static async deleteReservation(req:Request,res:Response){
         // DELETE method : api/admin/reservation
         try {
             const id = new Types.ObjectId(req.body.id)
@@ -46,7 +46,16 @@ class AdminEditReservation{
                 res.send("Not found").json(null)
             }else{
                 const deletedReservation = await ReservationsModel.deleteOne({"_id":id})
-                await Rooms.deleteOne({"reservation":{ $elemMatch: {"_id":id}}})
+
+                await Rooms.updateOne(
+                    {"reservation":{ $elemMatch: {"_id":id}}},
+                    {$pull: {
+                        "reservation":{
+                            "_id": id
+                        }
+                    }}
+                )
+
                 res.send("Deleted").json(deletedReservation)
             }
         } catch (error) {
@@ -55,3 +64,5 @@ class AdminEditReservation{
         }
     }
 }
+
+module.exports = AdminEditReservation

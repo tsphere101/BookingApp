@@ -1,7 +1,4 @@
 
-import { Types } from "mongoose"
-import { IGuest } from "./IGuest"
-
 export interface IReservationSchema{
     prefix:string
     fname: string
