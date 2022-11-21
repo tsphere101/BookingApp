@@ -13,8 +13,8 @@ console.log(process.env.PORT)
 
 app.use(express.json())
 
-app.listen(3000, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 
 app.get('/', (req: Request, res: Response) => {
