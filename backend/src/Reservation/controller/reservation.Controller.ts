@@ -5,6 +5,7 @@ const ReservationsModel = require("../schema/reservationSchema")
 const Rooms = require('../../Room/schema/roomSchema')
 
 import { RoomReservationBuilder } from './RoomReservationBuilder'
+import { EventReservationBuilder } from './EventReservationBuilder'
 
 const CustomerController = require('../../Customer/controller/customerController')
 
@@ -24,6 +25,25 @@ class ReservationController{
             }
 
             res.json(roomAdded)
+        } catch (error) {
+            console.log(error)
+            res.send("API error").status(500)
+        }
+    }
+
+    static async addEventReservation(req:Request,res:Response){
+        // POST : /api/reservation/event
+        try {
+
+            const EventBuilder = new EventReservationBuilder()
+            const eventAdded = await EventBuilder.makeReservation(req)
+            if(eventAdded != null){
+                console.log("adding customer")
+                console.log(eventAdded)
+                const addedCustomer = await CustomerController.addCustomer(req)
+            }
+
+            res.json(eventAdded)
         } catch (error) {
             console.log(error)
             res.send("API error").status(500)
