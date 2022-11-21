@@ -1,13 +1,11 @@
 
 import { Request , Response } from 'express'
-import { Reservations } from '../schema/reservationSchema'
-import { IReservation } from '../class/IReservation'
-import { IReservationSchema } from '../schema/IReservationSchema'
 
 import { model,Types} from 'mongoose'
 
 const Rooms = require('../../Room/schema/roomSchema')
-const ReservationsModel = model<IReservationSchema>("Reservations",Reservations)
+
+const ReservationsModel = require('../../Reservation/schema/reservationSchema')
 
 class AdminEditReservation{
     static async editReservation(req:Request,res:Response){
@@ -42,22 +40,21 @@ class AdminEditReservation{
         try {
             const id = new Types.ObjectId(req.body.id)
             const foundReservation = await ReservationsModel.findOne({"_id":id})
-            if(foundReservation == null){
-                res.send("Not found").json(null)
-            }else{
-                const deletedReservation = await ReservationsModel.deleteOne({"_id":id})
+            // if(foundReservation == null){
+            //     res.send("Not found").json(null)
+            // }
+            const deletedReservation = await ReservationsModel.deleteOne({"_id":id})
 
-                await Rooms.updateOne(
-                    {"reservation":{ $elemMatch: {"_id":id}}},
-                    {$pull: {
-                        "reservation":{
-                            "_id": id
-                        }
-                    }}
-                )
+            await Rooms.updateOne(
+                {"reservation":{ $elemMatch: {"_id":id}}},
+                {$pull: {
+                    "reservation":{
+                        "_id": id
+                    }
+                }}
+            )
 
-                res.send("Deleted").json(deletedReservation)
-            }
+            res.send("Deleted")
         } catch (error) {
             console.log(error)
             res.send("API error")

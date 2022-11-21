@@ -1,7 +1,10 @@
 
 import { Schema,model ,Types} from "mongoose"
 import { IRoom } from "./IRoom"
-import { Reservations } from "../../Reservation/schema/reservationSchema"
+// import { Reservations } from "../../Reservation/schema/reservationSchema"
+
+// const Reservations = require("../../Reservation/schema/reservationSchema")
+import { IReservationSchema } from "../../Reservation/schema/IReservationSchema"
 
 const Rooms = new Schema<IRoom>({
     roomName: { type: String},
@@ -10,7 +13,7 @@ const Rooms = new Schema<IRoom>({
     guest_amoung: {type: Number},
     pricePerPerson_no_breakfast: {type:Number},
     pricePerPerson_with_breakfast: {type:Number},
-    reservation: [Reservations]
+    reservation: []
 })
 
 module.exports = model<IRoom>("Rooms",Rooms)

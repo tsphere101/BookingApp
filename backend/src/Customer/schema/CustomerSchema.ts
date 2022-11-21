@@ -9,7 +9,8 @@ const customerSchema = new Schema<ICustomerSchema>({
     "email": {type:String,required:true},
     "phone": {type:String,required:true},
     "country": {type:String,required:true},
-    "addition": {type:String,required:true}
+    "attended_guest": {type:String,required:true},
+    "status": {type:String}
 })
 
 module.exports = model<ICustomerSchema>("Customers",customerSchema)

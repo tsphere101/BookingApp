@@ -2,32 +2,15 @@ import { model } from "mongoose"
 
 import { Request } from 'express'
 import { Reservation } from '../class/reservation'
-import { Reservations } from '../schema/reservationSchema'
-import { IReservationSchema } from '../schema/IReservationSchema'
+
 
 const Rooms = require('../../Room/schema/roomSchema')
-const ReservationsModel = model<IReservationSchema>("Reservations",Reservations)
+const ReservationsModel = require('../schema/reservationSchema')
 
 import { ReservationFactory } from './ReservationFactory'
 
 export class RoomReservationBuilder extends ReservationFactory{
-    // private roomNumber: string
-
-    // constructor(
-    //     prefix: string,
-    //     fname: string,
-    //     lname: string,
-    //     email: string,
-    //     phone: string,
-    //     address: string,
-    //     checkIn_date: Date,
-    //     checkOut_date: Date,
-    //     roomNumber: string
-    // ){
-    //     super(prefix,fname,lname,email,phone,address,checkIn_date,checkOut_date)
-    //     this.roomNumber = roomNumber
-
-    // }
+    
 
     async makeReservation(req:Request){
         try {
@@ -73,29 +56,6 @@ export class RoomReservationBuilder extends ReservationFactory{
             const guestNum = guest.adult + guest.child
             const totalPrice = (Number(roomPrice)*guestNum) - discount
     
-            // const addReservation = new ReservationsModel({
-            //     prefix: prefix,
-            //     fname: fname,
-            //     lname: lname,
-            //     email: email,
-            //     phone: phone,
-            //     address: address,
-            //     addition: addition,
-            //     guest: {
-            //         adult: guest.adult,
-            //         child: guest.child
-            //     },
-            //     roomNumber: roomForAdd.roomNumber,
-            //     checkIn_date: checkIn_date,
-            //     isCheckIn: false,
-            //     checkOut_date: checkOut_date,
-            //     isCheckOut: false,
-            //     pricePerPerson: roomPrice,
-            //     discount: discount,
-            //     totalPrice: totalPrice,
-            //     book_date: new Date()
-            // })
-    
             const roomReservationObject = new Reservation(
                 prefix,fname,lname,email,phone,address,addition,
                 checkIn_date,
@@ -105,7 +65,7 @@ export class RoomReservationBuilder extends ReservationFactory{
                 roomType,
                 guest.adult,
                 guest.child,
-                roomIDforAdd.roomNumber,
+                roomForAdd.roomNumber,
                 roomPrice,
                 totalPrice
             )

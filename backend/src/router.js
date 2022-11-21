@@ -28,6 +28,7 @@ router.route('/booking/find_available_room').get(ReservationController.findEmpty
 router.route('/booking').post(ReservationController.addReservation)
 // router.route('/booking').get(ReservationController.findReservation)
 router.route('/booking').post(ReservationController.addReservation)
+router.route('/booking/full_room').get(ReservationController.findFullRoom)
 // router.route('/employee').post(EmployeeFactory.buildEmployee)
 
 
@@ -51,7 +52,10 @@ router.route('/admin/reservation').delete(AdminEditReservation.deleteReservation
 
 
 //Admin guest(customer)
-router.route('./admin/customer').post(CustomerController.addCustomer)
+router.route('/admin/guest').post(CustomerController.addCustomer)
+router.route('/admin/guest').get(CustomerController.customerList)
+router.route('/admin/guest/reservation').get(CustomerController.customerReservation)
+router.route('/admin/guest/country').get(CustomerController.customerCountry)
 
 //Send Email
 router.route('/admin/sendmail').post(sendEmail)

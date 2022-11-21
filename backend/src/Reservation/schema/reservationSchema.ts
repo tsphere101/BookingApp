@@ -2,7 +2,7 @@
 import { Schema,Types,model } from "mongoose"
 import { IReservationSchema } from "./IReservationSchema"
 
-export const Reservations = new Schema<IReservationSchema>({
+const Reservations = new Schema<IReservationSchema>({
     prefix: {type:String,required:true},
     fname: {type:String,required:true},
     lname: {type:String,required:true},
@@ -25,4 +25,4 @@ export const Reservations = new Schema<IReservationSchema>({
     book_date: {type:Date}
 })
 
-// module.exports = model<IReservation>("Reservations",Reservations)
+module.exports = model<IReservationSchema>("Reservations",Reservations)

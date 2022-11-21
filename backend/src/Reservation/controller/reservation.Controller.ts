@@ -1,15 +1,12 @@
 import {Request,Response} from "express"
-import { model } from "mongoose"
-// import {Reservations} from '../schema/reservationSchema'
-// const Reservations = require('../schema/reservationSchema')
-import { Reservations } from '../schema/reservationSchema'
-import { IReservation } from '../class/IReservation'
-import { IReservationSchema } from '../schema/IReservationSchema'
+
+const ReservationsModel = require("../schema/reservationSchema")
+
 const Rooms = require('../../Room/schema/roomSchema')
 
-const ReservationsModel = model<IReservationSchema>("Reservations",Reservations)
-
 import { RoomReservationBuilder } from './RoomReservationBuilder'
+
+const CustomerController = require('../../Customer/controller/customerController')
 
 class ReservationController{
 
@@ -18,8 +15,14 @@ class ReservationController{
     static async addReservation(req:Request,res:Response){
         try {
 
-            const room = new RoomReservationBuilder()
-            const roomAdded = room.makeReservation(req)
+            const roomBuilder = new RoomReservationBuilder()
+            const roomAdded = await roomBuilder.makeReservation(req)
+            if(roomAdded != null){
+                console.log("adding customer")
+                console.log(roomAdded)
+                const addedCustomer = await CustomerController.addCustomer(req)
+            }
+
             res.json(roomAdded)
         } catch (error) {
             console.log(error)
@@ -102,6 +105,31 @@ class ReservationController{
             filtedRoomName = ["Family"]
         }
         return filtedRoomName
+    }
+
+    static async findFullRoom(req:Request,res:Response){
+        //GET : /booking/full_room
+        //https://www.mongodb.com/community/forums/t/group-by-year-month/102514/7
+        try {
+            const numberOfRoom = await Rooms.countDocuments()
+            console.log(numberOfRoom)
+
+            const test = await ReservationsModel.aggregate(
+                [{ 
+                    $group : { _id : { roomName: "Superior"}}
+                }]
+            )
+            
+            console.log(test)
+            // const roomFullDate={
+            //     "roomFullDate": numberOfRoom
+            // }
+            // res.json(roomFullDate.toJSON())
+            
+        } catch (error) {
+            console.log(error)
+            res.send("API error").status(500)
+        }
     }
 
 

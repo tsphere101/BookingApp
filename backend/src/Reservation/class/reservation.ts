@@ -1,13 +1,11 @@
-import { IGuest } from '../schema/IGuest'
 import { model,Types } from "mongoose"
 import { IReservation } from './IReservation'
-import {Reservations} from "../schema/reservationSchema"
-import { IReservationSchema } from '../schema/IReservationSchema'
+
 
 import { Request,Response} from 'express'
 
 const Rooms = require('../../Room/schema/roomSchema')
-
+const ReservationsModel = require('../schema/reservationSchema')
 
 export class Reservation implements IReservation{
     private prefix: string
@@ -55,7 +53,6 @@ export class Reservation implements IReservation{
     async saveToDB(){
         try {
              
-            const ReservationsModel = model<IReservationSchema>("Reservations",Reservations)
             const reservationAdd = new ReservationsModel({
                 prefix: this.prefix,
                 fname: this.fname,
@@ -120,7 +117,6 @@ export class Reservation implements IReservation{
 
     static async deleteReservation(req:Request,res:Response){
         try {
-            const ReservationsModel = model<IReservationSchema>("Reservations",Reservations)
             const id = new Types.ObjectId(req.body.id)
             const foundReservation = await ReservationsModel.findOne({"_id":id})
             if(foundReservation == null){

@@ -6,5 +6,6 @@ export interface ICustomerSchema{
     email: string,
     phone: string,
     country: string,
-    addition: string
+    attended_guest: string,
+    status: string
 }

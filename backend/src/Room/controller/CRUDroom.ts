@@ -58,7 +58,7 @@ class CRUDroom{
                 await addRoom.save()
             }
 
-            for(let i=1 ; i < 1 ; i++){
+            for(let i=1 ; i < 2 ; i++){
                 //6
                 const roomNum:string = "FAM" + String(i)
                 const addRoom = new Rooms({

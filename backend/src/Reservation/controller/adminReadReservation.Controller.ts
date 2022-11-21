@@ -1,11 +1,8 @@
 
 import { Request , Response } from 'express'
-import { Reservations } from '../schema/reservationSchema'
-import { IReservation } from '../class/IReservation'
-import { IReservationSchema } from '../schema/IReservationSchema'
 
 import { model,Types} from 'mongoose'
-const ReservationsModel = model<IReservationSchema>("Reservations",Reservations)
+const ReservationsModel = require('../schema/reservationSchema')
 
 class AdminReadReservation{
     static async readReservation(req:Request,res:Response){
