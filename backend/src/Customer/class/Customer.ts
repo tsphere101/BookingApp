@@ -8,7 +8,7 @@ export class Customer{
     private lname: string
     private email: string
     private phone: string
-    private country: string
+    private address: string
     private attended_guest: string
     private status: string
 
@@ -18,7 +18,7 @@ export class Customer{
         lname: string,
         email: string,
         phone: string,
-        country: string,
+        address: string,
         attended_guest: string,
         status: string
     ){
@@ -27,7 +27,7 @@ export class Customer{
         this.lname = lname
         this.email = email
         this.phone = phone
-        this.country = country
+        this.address = address
         this.attended_guest = attended_guest
         this.status = status
     }
@@ -40,7 +40,7 @@ export class Customer{
                 "lname": this.lname,
                 "email": this.email,
                 "phone": this.phone,
-                "country": this.country,
+                "address": this.address,
                 "attended_guest": this.attended_guest,
                 "status": this.status
             })

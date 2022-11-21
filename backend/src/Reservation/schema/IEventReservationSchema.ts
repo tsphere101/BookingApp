@@ -7,8 +7,8 @@ export interface IEventReservationSchema{
     decision: string
     min_budget: number
     max_budget: number
-    companyName:string
-    country:string
+    company:string
+    address:string
     zip:string
     addition:string
     start: Date

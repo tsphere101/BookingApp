@@ -33,10 +33,13 @@ class ReservationController{
 
     static async addEventReservation(req:Request,res:Response){
         // POST : /api/reservation/event
+        console.log("addEventReservation::reservation.Controller")
         try {
 
             const EventBuilder = new EventReservationBuilder()
             const eventAdded = await EventBuilder.makeReservation(req)
+            eventAdded?.saveToDB()
+
             if(eventAdded != null){
                 console.log("adding customer")
                 console.log(eventAdded)
@@ -44,6 +47,7 @@ class ReservationController{
             }
 
             res.json(eventAdded)
+
         } catch (error) {
             console.log(error)
             res.send("API error").status(500)
