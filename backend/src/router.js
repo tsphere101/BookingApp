@@ -40,6 +40,8 @@ router.route('/admin/housekeeping/task/add').post(HousekeepingController.addHous
 router.route('/admin/housekeeping/task/editComment').post(HousekeepingController.editHousekeepingTaskComment)
 router.route('/admin/housekeeping/task/delete').post(HousekeepingController.deleteHousekeepingTask)
 router.route('/admin/housekeeping/task/changeCondition').post(HousekeepingController.changeTaskCondition)
+router.route('/admin/housekeeping/task/changeAssignedTo').post(HousekeepingController.changeAssignedTo)
+router.route('/admin/housekeeping/task/changeDoNotDisturb').post(HousekeepingController.changeDoNotDisturb)
 router.route('/admin/housekeeping/housekeepers').get(HousekeepingController.getHousekeepers)
 router.route('/admin/housekeeping/tasks/filter').get(HousekeepingController.getHousekeepingTasksFilter)
 // Admin - Employee

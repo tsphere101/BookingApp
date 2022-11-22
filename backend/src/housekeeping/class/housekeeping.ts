@@ -2,6 +2,8 @@ import mongoose, { model } from 'mongoose'
 import {HousekeepingTaskSchema} from '../schema/housekeepingTaskSchema'
 import {IHousekeepingTask} from '../schema/IHousekeepingTask'
 export const housekeepingTaskModel = model<IHousekeepingTask>("Housekeeping",HousekeepingTaskSchema)
+import { FilterBuilder } from "./housekeepingFilter";
+const Employees = require('../../Employee/schema/EmployeeSchema')
 
 export class Housekeeping{
     private roomNumber: string
@@ -90,6 +92,44 @@ export class Housekeeping{
         }
     }
 
+    static async changeAssignedTo(taskId:string,employeeId:string) {
+        try {
+            const objId = new mongoose.Types.ObjectId(taskId)
+
+            // query the employe 
+            const employee = await Employees.findOne({_id:new mongoose.Types.ObjectId(employeeId)}).exec()
+            let employeeName = employee.username
+            console.log(employeeName)
+            // Update employeeId and "assignedTo" on task
+            const updatedTaskEmployeeId= await housekeepingTaskModel.updateOne({"_id":objId},{"employeeId":employee.id})
+            const updatedTask= await housekeepingTaskModel.updateOne({"_id":objId},{"assiged":employeeName})
+            // const updatedTaskEmployeeId= await housekeepingTaskModel.updateOne({"_id":objId},{"employeeId":employeeId})
+            /**
+             * Change the name in "assignedTo"
+            */
+            // update "assignedTo" on the task
+            console.log("updatedTaskEmployeeId",updatedTaskEmployeeId)
+            console.log("updatedTask",updatedTask)
+            return updatedTask
+        } catch (error) {
+            console.log(error)
+            return null       
+        }
+
+    }
+
+    static async changeDoNotDisturb(_id:string,status:string) {
+        try {
+            const objId = new mongoose.Types.ObjectId(_id)
+            const updatedTask = await housekeepingTaskModel.updateOne({"_id":objId},{"doNotDisturb":status})
+            return updatedTask
+        } catch (error) {
+            console.log(error)
+            return null       
+        }
+
+    }
+
     static async deleteTask(id:string){
         try{
             const objId = new mongoose.Types.ObjectId(id)
@@ -109,6 +149,19 @@ export class Housekeeping{
             console.log(`${error}`)
             return null
         }
+    }
+
+
+    static async filter() {
+
+        let ft = new FilterBuilder()
+        .which("type",["sup"])
+        .which("condition",["clean","dirty"]) 
+        .build()
+
+        let result = ft.query().exec()
+
+        return result
     }
 
 }

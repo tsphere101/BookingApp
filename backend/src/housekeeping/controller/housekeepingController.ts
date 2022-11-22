@@ -40,6 +40,36 @@ class HousekeepingController {
     }
 
     /**
+     * Change the employee who has the responsibility for the specified task id (_id). 
+     */
+    static async changeAssignedTo(req: Request, res: Response) {
+        try {
+            const employeeId = req.body.employeeId // body.assigned to should contains employeeId
+            const taskId = req.body.taskId
+            const updatedTask = await Housekeeping.changeAssignedTo(taskId, employeeId)
+            res.json(updatedTask)
+        } catch (error) {
+            console.log(error)
+            res.send("API error")
+        }
+    }
+
+    /**
+     * Change doNotDisturb status for the specified task id (_id).
+     */
+    static async changeDoNotDisturb(req: Request, res: Response) {
+        try {
+            const doNotDisturb = req.body.doNotDisturb
+            const taskId = req.body.taskId
+            const updatedTask = await Housekeeping.changeDoNotDisturb(taskId, doNotDisturb)
+            res.json(updatedTask)
+        } catch (error) {
+            console.log(error)
+            res.send("API error")
+        }
+    }
+
+    /**
      * Get all housekeeping tasks from database.
      */
     static async getHousekeepingTasks(req: Request, res: Response) {
@@ -54,42 +84,106 @@ class HousekeepingController {
     }
 
     /**
-     * Get the tasks by filter : RoomType, RoomStatus, Condition, FrontdeskStatus, AssignedEmployeeId.
+     * Get the tasks from the database by filter : RoomType, RoomStatus, Condition, FrontdeskStatus, AssignedEmployeeId.
+     * Filter can be multiple values.
      */
     static async getHousekeepingTasksFilter(req: Request, res: Response) {
         try {
-            let {type, roomStatus, condition, frontdeskStatus, employeeId} = req.query
+            let { type, roomStatus, condition, frontdeskStatus, employeeId } = req.query
+            /*
+             * 
+             * type := ex.["beh","sup"] (multiple values)
+             * roomStatus := ex.["vacant"] (multiple values)
+             * condition := ex.["clean"] (multiple values)
+             * frontdeskStatus := ex.["not-reserved","check-out"](multiple values) 
+             * employeeId := ex.[] or ["637112d403e528adbec62822","6370ba7976b201aea7853104"](multiple values) 
+             * 
+             */
             
-            let filter = []
-            if (typeof type === "string") 
-                filter.push({type:type})
+            // let filters = []
+
             
-            if (typeof condition === "string") 
-                filter.push({condition:condition})
+            console.log("housekeeping query params :",req.query)
 
-            if (typeof roomStatus==="string")
-                filter.push({roomStatus:roomStatus})
+            let query = housekeepingTaskModel .find()
 
-            if (typeof frontdeskStatus==="string")
-                filter.push({frontdeskStatus:frontdeskStatus})
-
-            if (typeof employeeId==="string")
-                filter.push({employeeId:employeeId})
-            
-            
-            let housekeepingTasks
-
-            if (filter.length !== 0) {
-                housekeepingTasks = await housekeepingTaskModel 
-                .find()
-                .and(filter)
+            if (Array.isArray(type)) {
+                query = query.in("type",type)
             }
-            else {
-                housekeepingTasks = await housekeepingTaskModel 
-                .find()
+            else if (typeof type !== "undefined"){
+                query = query.in("type",[type])
             }
 
-            res.json(housekeepingTasks)
+            if (Array.isArray(roomStatus)) {
+                query = query.in("roomStatus",roomStatus)
+            }
+            else if (typeof roomStatus !== "undefined"){
+                query = query.in("roomStatus",[roomStatus])
+            }
+
+            if (Array.isArray(condition)) {
+                query = query.in("condition",condition)
+            }
+            else if (typeof condition !== "undefined"){
+                query = query.in("condition",[condition])
+            }
+
+            if (Array.isArray(frontdeskStatus)) {
+                query = query.in("frontdeskStatus",frontdeskStatus)
+            }
+            else if (typeof frontdeskStatus !== "undefined"){
+                query = query.in("frontdeskStatus",[frontdeskStatus])
+            }
+            
+            if (Array.isArray(employeeId)) {
+                query = query.in("employeeId",employeeId)
+            }
+            else if (typeof employeeId !== "undefined"){
+                query = query.in("employeeId",[employeeId])
+            }
+
+            let results = await query.exec()
+            
+            res.json(results)
+
+            // let r = await Housekeeping.filter()
+            // console.log(r)
+
+
+            // Check if each parameters are defined, otherwise ignore the parameters
+            // if (typeof type === "")
+            
+
+            // if (typeof type === "string")
+            //     filters.push({ type: type })
+
+
+            // if (typeof condition === "string") 
+            //     filters.push({condition:condition})
+
+            // if (typeof roomStatus==="string")
+            //     filters.push({roomStatus:roomStatus})
+
+            // if (typeof frontdeskStatus==="string")
+            //     filters.push({frontdeskStatus:frontdeskStatus})
+
+            // if (typeof employeeId==="string")
+            //     filters.push({employeeId:employeeId})
+            
+            
+            // let housekeepingTasks
+
+            // if (filters.length !== 0) {
+            //     housekeepingTasks = await housekeepingTaskModel 
+            //     .find()
+            //     .and(filters)
+            // }
+            // else {
+            //     housekeepingTasks = await housekeepingTaskModel 
+            //     .find()
+            // }
+
+            // res.json(housekeepingTasks)
         }
         catch(error) {
             console.log(error)
