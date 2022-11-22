@@ -52,6 +52,9 @@ router.route('/admin/employee/login').post(EmployeeLogin.login)
 router.route('/admin/reservation').get(AdminReadReservation.readReservation)
 router.route('/admin/reservation').delete(AdminEditReservation.deleteReservation)
 
+// Event Reservation
+router.route('/reservation/event').post(ReservationController.addEventReservation)
+
 
 //Admin guest(customer)
 router.route('/admin/guest').post(CustomerController.addCustomer)

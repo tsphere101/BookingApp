@@ -13,7 +13,7 @@ console.log(process.env.PORT)
 
 app.use(express.json())
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
 });
 

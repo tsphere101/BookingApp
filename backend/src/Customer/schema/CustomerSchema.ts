@@ -8,7 +8,7 @@ const customerSchema = new Schema<ICustomerSchema>({
     "lname": {type:String,required:true},
     "email": {type:String,required:true},
     "phone": {type:String,required:true},
-    "country": {type:String,required:true},
+    "address": {type:String,required:true},
     "attended_guest": {type:String,required:true},
     "status": {type:String}
 })

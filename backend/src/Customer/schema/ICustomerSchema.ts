@@ -5,7 +5,7 @@ export interface ICustomerSchema{
     lname: string,
     email: string,
     phone: string,
-    country: string,
+    address: string,
     attended_guest: string,
     status: string
 }
