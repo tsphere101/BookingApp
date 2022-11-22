@@ -58,9 +58,9 @@ class ReservationController{
 
     public static async findEmptyRoomByDate(req:Request,res:Response){
         try {
-            const { checkIn , checkOut , guest} = req.body
+            const { checkIn , checkOut , guest}:any = req.query
 
-            const nameListRoomTypeFitGuest = ReservationController.filterRoomName(guest)
+            const nameListRoomTypeFitGuest = ReservationController.filterRoomName(parseInt(guest))
 
             let okRoomType = []
 
