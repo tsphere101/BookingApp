@@ -3,12 +3,19 @@ import { IHousekeepingTask } from "../schema/IHousekeepingTask"
 import { housekeepingTaskModel } from "./housekeeping"
 
 class Filter {
-    query_ 
-    constructor (params: {[index:string]:any}) {
-    // constructor(params: Array<{key:string,value:string[]}>) {
+    query_
+    constructor(params: { [index: string]: any }) {
         let q = housekeepingTaskModel.find()
 
-        
+        let keys = Object.keys(params)
+        for (let i in keys) {
+            let filter = keys[i]
+
+            let key = params[filter].key
+            let value = params[filter].value
+
+            q = q.in(key,value)
+        }
 
         this.query_ = q
     }
@@ -21,26 +28,21 @@ class Filter {
 }
 
 export class FilterBuilder {
-    // params: {
-    //     type: string[]
-    //     condition: string[]
-    // }
-    params : {[index:string]: any}
+    params: { [index: string]: any }
+    filters: Array<string>
 
     constructor() {
-        this.params = {
-            type:{key:"type",value:new Array<string>},
-            condition:{key:"condition",value:new Array<string>},
-        }
-        // this.params = {
-        //     type:[],
-        //     condition:[],
-        // }
+        this.params = {}
+        this.filters = []
     }
 
     which(key: string, value: any[]) {
-        this.params[key] = {key:key,value:value};
 
+        if (value.length === 0)
+            return this
+
+        this.params[key] = { key: key, value: value };
+        this.filters.push(key)
         return this
     }
 
