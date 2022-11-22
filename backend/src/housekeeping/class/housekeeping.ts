@@ -68,7 +68,7 @@ export class Housekeeping{
     }
 
 
-    static async changeCondition(_id:string,con:string) {
+    public static async changeCondition(_id:string,con:string) {
         try {
             const objId = new mongoose.Types.ObjectId(_id)
             const updatedTask = await housekeepingTaskModel.updateOne({"_id": objId},{"condition":con})
@@ -79,7 +79,7 @@ export class Housekeeping{
         }
     }
 
-    static async changeRoomStatus(_id:string,status:string){
+    public static async changeRoomStatus(_id:string,status:string){
         try {
             const objId = new mongoose.Types.ObjectId(_id)
             const updatedRoom = await housekeepingTaskModel.updateOne({"_id":objId},{"roomStatus":status})
@@ -90,7 +90,7 @@ export class Housekeeping{
         }
     }
 
-    static async deleteTask(id:string){
+    public static async deleteTask(id:string){
         try{
             const objId = new mongoose.Types.ObjectId(id)
             return await housekeepingTaskModel.deleteOne({"_id": objId})
@@ -100,7 +100,7 @@ export class Housekeeping{
         }
     }
 
-    static async editTaskComment(_id:string,comment:string) {
+    public static async editTaskComment(_id:string,comment:string) {
         try {
             const objId = new mongoose.Types.ObjectId(_id)
             const updatedTask = await housekeepingTaskModel.updateOne({"_id":objId},{"comment":comment})

@@ -25,11 +25,12 @@ export class Reservation implements IReservation{
     private checkOut_date: Date
     private roomPrice: number
     private totalPrice: number
+    private status: string
 
 
     constructor(
         prefix:string,fname:string,lname:string,email:string,phone:string,address:string,addition:string,checkIn_date:Date,checkOut_date:Date,discount:number,breakfast:boolean,roomType:string,
-        adult: number,child: number,roomNumber: string,roomPrice: number,totalPrice: number
+        adult: number,child: number,roomNumber: string,roomPrice: number,totalPrice: number,status: string
         ){
         this.prefix = prefix
         this.fname = fname
@@ -48,6 +49,7 @@ export class Reservation implements IReservation{
         this.roomNumber = roomNumber
         this.roomPrice = roomPrice
         this.totalPrice = totalPrice
+        this.status = status
     }
 
     async saveToDB(){
@@ -73,7 +75,8 @@ export class Reservation implements IReservation{
                 pricePerPerson: this.roomPrice,
                 discount: this.discount,
                 totalPrice: this.totalPrice,
-                book_date: new Date()
+                book_date: new Date(),
+                status : this.status
             })
 
             const addedReservation = await reservationAdd.save()
@@ -115,7 +118,7 @@ export class Reservation implements IReservation{
     }
     
 
-    static async deleteReservation(req:Request,res:Response){
+    public static async deleteReservation(req:Request,res:Response){
         try {
             const id = new Types.ObjectId(req.body.id)
             const foundReservation = await ReservationsModel.findOne({"_id":id})

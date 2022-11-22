@@ -6,7 +6,7 @@ const Rooms = require('../schema/roomSchema')
 
 class ClientRoom{
     
-    static async findEmptyRoom(req:Request,res:Response){
+    public static async findEmptyRoom(req:Request,res:Response){
         try {
 
             const emptyRoom = await Rooms.find({"roomName":"Superior Room"})
@@ -18,7 +18,7 @@ class ClientRoom{
         }
     }
 
-    static async findEmptyRoomByDate(req:Request,res:Response){
+    public static async findEmptyRoomByDate(req:Request,res:Response){
         try {
             const { roomType , checkIn , checkOut , Guest} = req.body
 

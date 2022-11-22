@@ -15,6 +15,8 @@ import { sendEmail } from './mail/clientReservationConfirm'
 
 const CustomerController = require('./Customer/controller/customerController')
 
+const EventReservationController = require('./Reservation/controller/EventReservationController')
+
 
 
 //Room----------------------------------------------------------------------------------------
@@ -48,14 +50,17 @@ router.route('/admin/employee/login').post(EmployeeLogin.login)
 
 //Admin reservation
 router.route('/admin/reservation').get(AdminReadReservation.readReservation)
-router.route('/admin/reservation').delete(AdminEditReservation.deleteReservation)
-
+router.route('/admin/reservation/delete').post(AdminEditReservation.deleteReservation)
+router.route('/admin/reservation/change_status').post(AdminEditReservation.changeReservationStatus)
+router.route('/admin/reservation/event').post(EventReservationController.getEventReservation)
 
 //Admin guest(customer)
 router.route('/admin/guest').post(CustomerController.addCustomer)
 router.route('/admin/guest').get(CustomerController.customerList)
 router.route('/admin/guest/reservation').get(CustomerController.customerReservation)
 router.route('/admin/guest/country').get(CustomerController.customerCountry)
+
+
 
 //Send Email
 router.route('/admin/sendmail').post(sendEmail)

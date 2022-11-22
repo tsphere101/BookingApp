@@ -12,11 +12,13 @@ const EventReservationSchema = new Schema<IEventReservationSchema>({
     min_budget: {type: Number,require:true},
     max_budget: {type: Number,require:true},
     companyName: {type:String,required:true},
-    country: {type:String,required:true},
+    address: {type:String,required:true},
     zip: {type:String,required:true},
     addition: {type:String,required:true},
-    start:{tpye: Date,require: true},
-    end: {tpye: Date,require: true},
+    start:{type: Date,require: true},
+    end: {type: Date,require: true},
+    status: {type: String},
+    type: {type: String}
 })
 
 module.exports = model<IEventReservationSchema>("EventReservations",EventReservationSchema)

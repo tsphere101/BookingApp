@@ -11,7 +11,7 @@ const Employees = require('../schema/EmployeeSchema')
 
 class EmployeeFactory{
 
-    static async buildEmployee(req:Request,res: Response){
+    public static async buildEmployee(req:Request,res: Response){
         try {
             const {username,password,email,fname,lname,role} = req.body
 

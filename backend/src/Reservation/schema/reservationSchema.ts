@@ -22,7 +22,8 @@ const Reservations = new Schema<IReservationSchema>({
     pricePerPerson: {type:Number,required:true},
     discount: {type:Number},
     totalPrice:{type:Number},
-    book_date: {type:Date}
+    book_date: {type:Date},
+    status: {type: String}
 })
 
 module.exports = model<IReservationSchema>("Reservations",Reservations)

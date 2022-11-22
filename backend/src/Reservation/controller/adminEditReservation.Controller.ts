@@ -6,9 +6,10 @@ import { model,Types} from 'mongoose'
 const Rooms = require('../../Room/schema/roomSchema')
 
 const ReservationsModel = require('../../Reservation/schema/reservationSchema')
+import { ChangeReservationStatusHandler } from './ChangeReservationStatusHandler'
 
 class AdminEditReservation{
-    static async editReservation(req:Request,res:Response){
+    public static async editReservation(req:Request,res:Response){
         // UPDATE method : api/admin/reservation
         try {
             // const { 
@@ -35,7 +36,7 @@ class AdminEditReservation{
         }
     }
 
-    static async deleteReservation(req:Request,res:Response){
+    public static async deleteReservation(req:Request,res:Response){
         // DELETE method : api/admin/reservation
         try {
             const id = new Types.ObjectId(req.body.id)
@@ -58,6 +59,20 @@ class AdminEditReservation{
         } catch (error) {
             console.log(error)
             res.send("API error")
+        }
+    }
+
+    public static async changeReservationStatus(req:Request,res:Response){
+        //POST : api/admin/guest/change_status
+        try {
+            const { id , status } = req.body
+            const changeCustomerStatusHandler = new ChangeReservationStatusHandler(id,status)
+            const changedStatusReservation = await changeCustomerStatusHandler.execute()
+            console.log(changedStatusReservation)
+            res.json(changedStatusReservation).status(200)
+        } catch (error) {
+            console.log(error)
+            res.send("API error").status(500)
         }
     }
 }

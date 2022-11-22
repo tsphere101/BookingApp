@@ -3,7 +3,7 @@ import { Housekeeping } from "../class/housekeeping"
 import {Request } from 'express'
 
 export class housekeepingTaskBuilder{
-    static make(req:Request){
+    public static make(req:Request){
         try {
             const {
                 roomNumber,type,condition,roomStatus,arrivalDate,departureDate,frontdeskStatus,assiged,employeeId,doNotDisturb,comment

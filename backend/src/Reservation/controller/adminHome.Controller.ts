@@ -4,7 +4,7 @@ import { Request , Response } from 'express'
 const ReservationsModel = require('../schema/reservationSchema')
 
 class AdminHomeController{
-    static async showSummeryHome(req:Request,res:Response){
+    public static async showSummeryHome(req:Request,res:Response){
         try {
             const todayReservation = await AdminHomeController.showReservation(new Date())
             let todayReser = []
@@ -77,7 +77,7 @@ class AdminHomeController{
 
 
 
-    static async showReservation(date:Date){
+    public static async showReservation(date:Date){
         try {
             const todayReservation = await ReservationsModel.find({"checkIn_date": date})
             return todayReservation
@@ -87,7 +87,7 @@ class AdminHomeController{
         }
     }
 
-    static async showWeekOutlook(){
+    public static async showWeekOutlook(){
         try {
             const today = new Date()
             const nextSevenDay = new Date(today.getDate() + 14)

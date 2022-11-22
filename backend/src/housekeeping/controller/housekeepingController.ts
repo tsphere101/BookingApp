@@ -10,7 +10,7 @@ class HousekeepingController {
     /**
      * Create a new housekeeping task and save to database.
      */
-    static async addHousekeepingTask(req: Request, res: Response) {
+    public static async addHousekeepingTask(req: Request, res: Response) {
         // console.log(`adding housekeepingtask..`)
         try {
             const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
@@ -26,7 +26,7 @@ class HousekeepingController {
     /**
      * Change the condition of the existed housekeeping task : ex. [Clean, Dirty] 
      */
-    static async changeTaskCondition(req: Request, res: Response) {
+    public static async changeTaskCondition(req: Request, res: Response) {
         // console.log(`changing task ${req.body._id}'s condition`)
         try {
             // const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
@@ -42,7 +42,7 @@ class HousekeepingController {
     /**
      * Get all housekeeping tasks from database.
      */
-    static async getHousekeepingTasks(req: Request, res: Response) {
+    public static async getHousekeepingTasks(req: Request, res: Response) {
         try {
             const housekeepingTasks = await housekeepingTaskModel.find()
             res.json(housekeepingTasks)
@@ -56,7 +56,7 @@ class HousekeepingController {
     /**
      * Get the tasks by filter : RoomType, RoomStatus, Condition, FrontdeskStatus, AssignedEmployeeId.
      */
-    static async getHousekeepingTasksFilter(req: Request, res: Response) {
+    public static async getHousekeepingTasksFilter(req: Request, res: Response) {
         try {
             let {type, roomStatus, condition, frontdeskStatus, employeeId} = req.query
             
@@ -100,7 +100,7 @@ class HousekeepingController {
     /**
      * Get the employees who has the role "housekeeper" from the database.
      */
-    static async getHousekeepers(req: Request, res: Response) {
+    public static async getHousekeepers(req: Request, res: Response) {
         try {
             const housekeepers = await Employees.find({ role: "housekeeper" }).exec()
             res.json(housekeepers)
@@ -114,7 +114,7 @@ class HousekeepingController {
     /**
      * Edit the comment of the housekeeping task on the given _id 
      */
-    static async editHousekeepingTaskComment(req: Request, res: Response) {
+    public static async editHousekeepingTaskComment(req: Request, res: Response) {
         try {
             const taskId = req.body._id
             const newComment = req.body.comment
@@ -130,7 +130,7 @@ class HousekeepingController {
     /**
      * Delete the housekeeping task on given _id 
      */
-    static async deleteHousekeepingTask(req: Request, res: Response) {
+    public static async deleteHousekeepingTask(req: Request, res: Response) {
         try {
             const taskId = req.body._id
             const deleted = await Housekeeping.deleteTask(taskId)

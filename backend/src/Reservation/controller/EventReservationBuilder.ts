@@ -5,10 +5,12 @@ import { Request } from 'express'
 
 export class EventReservationBuilder extends ReservationFactory{
     
+    //reservationController -> สร้าง EventReservationBuilder.makeReservation(req) -> สร้าง EventReservationObj -> EventReservationObj -> EventReservationObj.save()
+    //
 
-    async makeReservation(req:Request){
+    public async makeReservation(req:Request){
         try {
-            
+            // const 
             
         } catch (error) {
             console.log(error)
