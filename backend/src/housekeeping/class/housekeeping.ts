@@ -2,6 +2,7 @@ import mongoose, { model } from 'mongoose'
 import {HousekeepingTaskSchema} from '../schema/housekeepingTaskSchema'
 import {IHousekeepingTask} from '../schema/IHousekeepingTask'
 export const housekeepingTaskModel = model<IHousekeepingTask>("Housekeeping",HousekeepingTaskSchema)
+import { FilterBuilder } from "./housekeepingFilter";
 
 export class Housekeeping{
     private roomNumber: string
@@ -109,6 +110,19 @@ export class Housekeeping{
             console.log(`${error}`)
             return null
         }
+    }
+
+
+    static async filter() {
+
+        let ft = new FilterBuilder()
+        .which("type",["sup"])
+        .which("condition",["clean","dirty"]) 
+        .build()
+
+        let result = ft.query().exec()
+
+        return result
     }
 
 }
