@@ -4,6 +4,8 @@ import { HousekeepingTaskSchema } from '../schema/housekeepingTaskSchema'
 import { IHousekeepingTask } from '../schema/IHousekeepingTask'
 import { housekeepingTaskModel } from '../class/housekeeping'
 import { Housekeeping } from '../class/housekeeping'
+import { string } from 'joi'
+import { FilterBuilder } from '../class/housekeepingFilter'
 const Employees = require('../../Employee/schema/EmployeeSchema')
 
 class HousekeepingController {
@@ -88,104 +90,66 @@ class HousekeepingController {
      * Filter can be multiple values.
      */
     static async getHousekeepingTasksFilter(req: Request, res: Response) {
+        /**
+         * This FILTER_KEYS is used to unpack parameters from request body
+         * 
+         * Add new filter to this array to get more specific filter.
+         * 
+        */
+        const FILTER_KEYS = [
+            "type",
+            "roomStatus",
+            "condition",
+            "frontdeskStatus",
+            "employeeId",
+        ]
+        /*
+        * Filter by conditions.
+        * type := ex.["beh","sup"] (multiple values)
+        * roomStatus := ex.["vacant"] (multiple values)
+        * condition := ex.["clean"] (multiple values)
+        * frontdeskStatus := ex.["not-reserved","check-out"](multiple values) 
+        * employeeId := ex.[] or ["637112d403e528adbec62822","6370ba7976b201aea7853104"](multiple values) 
+        * 
+        */
+
+
+        /**
+         * 
+         * Builder design pattern is applied here.
+         * 
+         * Use FilterBuilder to build Filter object 
+         * which is used to query the housekeeping tasks from db
+         * in filter funcion in housekeeping.ts
+         * 
+        */
+
         try {
-            let { type, roomStatus, condition, frontdeskStatus, employeeId } = req.query
-            /*
-             * 
-             * type := ex.["beh","sup"] (multiple values)
-             * roomStatus := ex.["vacant"] (multiple values)
-             * condition := ex.["clean"] (multiple values)
-             * frontdeskStatus := ex.["not-reserved","check-out"](multiple values) 
-             * employeeId := ex.[] or ["637112d403e528adbec62822","6370ba7976b201aea7853104"](multiple values) 
-             * 
-             */
-            
-            // let filters = []
+            // Unpack params from req.body
+            let filters: any[] = []
+            FILTER_KEYS.forEach(key => {
+                let values = []
+                let value_ = req.query[key]
 
-            
-            console.log("housekeeping query params :",req.query)
+                if (typeof value_ === "string")
+                    values.push(value_)
+                if (Array.isArray(value_))
+                    values.push(...value_)
 
-            let query = housekeepingTaskModel .find()
+                filters.push(
+                    {
+                        key: key,
+                        value: values
+                    }
+                )
+            })
 
-            if (Array.isArray(type)) {
-                query = query.in("type",type)
-            }
-            else if (typeof type !== "undefined"){
-                query = query.in("type",[type])
-            }
+            let result = await Housekeeping.filter(filters)
 
-            if (Array.isArray(roomStatus)) {
-                query = query.in("roomStatus",roomStatus)
-            }
-            else if (typeof roomStatus !== "undefined"){
-                query = query.in("roomStatus",[roomStatus])
-            }
+            res.json(result)
 
-            if (Array.isArray(condition)) {
-                query = query.in("condition",condition)
-            }
-            else if (typeof condition !== "undefined"){
-                query = query.in("condition",[condition])
-            }
-
-            if (Array.isArray(frontdeskStatus)) {
-                query = query.in("frontdeskStatus",frontdeskStatus)
-            }
-            else if (typeof frontdeskStatus !== "undefined"){
-                query = query.in("frontdeskStatus",[frontdeskStatus])
-            }
-            
-            if (Array.isArray(employeeId)) {
-                query = query.in("employeeId",employeeId)
-            }
-            else if (typeof employeeId !== "undefined"){
-                query = query.in("employeeId",[employeeId])
-            }
-
-            let results = await query.exec()
-            
-            res.json(results)
-
-            // let r = await Housekeeping.filter()
-            // console.log(r)
-
-
-            // Check if each parameters are defined, otherwise ignore the parameters
-            // if (typeof type === "")
-            
-
-            // if (typeof type === "string")
-            //     filters.push({ type: type })
-
-
-            // if (typeof condition === "string") 
-            //     filters.push({condition:condition})
-
-            // if (typeof roomStatus==="string")
-            //     filters.push({roomStatus:roomStatus})
-
-            // if (typeof frontdeskStatus==="string")
-            //     filters.push({frontdeskStatus:frontdeskStatus})
-
-            // if (typeof employeeId==="string")
-            //     filters.push({employeeId:employeeId})
-            
-            
-            // let housekeepingTasks
-
-            // if (filters.length !== 0) {
-            //     housekeepingTasks = await housekeepingTaskModel 
-            //     .find()
-            //     .and(filters)
-            // }
-            // else {
-            //     housekeepingTasks = await housekeepingTaskModel 
-            //     .find()
-            // }
-
-            // res.json(housekeepingTasks)
         }
-        catch(error) {
+        catch (error) {
             console.log(error)
             res.send("API error")
         }
@@ -212,7 +176,7 @@ class HousekeepingController {
         try {
             const taskId = req.body._id
             const newComment = req.body.comment
-            const updated = await Housekeeping.editTaskComment(taskId,newComment)
+            const updated = await Housekeeping.editTaskComment(taskId, newComment)
             res.json(updated)
         }
         catch (error) {

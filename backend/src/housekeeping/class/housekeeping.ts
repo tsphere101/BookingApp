@@ -152,16 +152,29 @@ export class Housekeeping{
     }
 
 
-    static async filter() {
+    /**
+     * Filter the housekeeping task and query from database.
+     * @param filters list of filter keys and values
+     * @returns result of the query for the given filter 
+     */
+    static async filter(filters:Array<any>) {
 
-        let ft = new FilterBuilder()
-        .which("type",["sup"])
-        .which("condition",["clean","dirty"]) 
-        .build()
+        let filterBuilder = new FilterBuilder()
 
-        let result = ft.query().exec()
+        /**
+         * Using builder pattern to chain the filter conditions.
+         */
+
+        filterBuilder = filters.reduce( (filterChain,filter) => {
+            return filterChain.which(filter.key,filter.value)
+        },filterBuilder) 
+
+        let filter_ = filterBuilder.build()
+
+        let result = await filter_.query().exec()
 
         return result
+
     }
 
 }
