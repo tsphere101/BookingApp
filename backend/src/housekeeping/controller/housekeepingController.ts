@@ -4,8 +4,6 @@ import { HousekeepingTaskSchema } from '../schema/housekeepingTaskSchema'
 import { IHousekeepingTask } from '../schema/IHousekeepingTask'
 import { housekeepingTaskModel } from '../class/housekeeping'
 import { Housekeeping } from '../class/housekeeping'
-import { string } from 'joi'
-import { FilterBuilder } from '../class/housekeepingFilter'
 const Employees = require('../../Employee/schema/EmployeeSchema')
 
 class HousekeepingController {

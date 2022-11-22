@@ -1,8 +1,8 @@
 import mongoose, { model } from 'mongoose'
 import {HousekeepingTaskSchema} from '../schema/housekeepingTaskSchema'
 import {IHousekeepingTask} from '../schema/IHousekeepingTask'
+import { FilterBuilder } from './housekeepingFilterBuilder'
 export const housekeepingTaskModel = model<IHousekeepingTask>("Housekeeping",HousekeepingTaskSchema)
-import { FilterBuilder } from "./housekeepingFilter";
 const Employees = require('../../Employee/schema/EmployeeSchema')
 
 export class Housekeeping{

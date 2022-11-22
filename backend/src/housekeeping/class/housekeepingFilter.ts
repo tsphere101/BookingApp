@@ -1,8 +1,12 @@
-import mongoose from "mongoose"
-import { IHousekeepingTask } from "../schema/IHousekeepingTask"
 import { housekeepingTaskModel } from "./housekeeping"
 
-class Filter {
+/**
+ * 
+ * Filter class is used to query housekeeping tasks
+ * with the with the specified filters.
+ * 
+ */
+export class Filter {
     query_
     constructor(params: { [index: string]: any }) {
         let q = housekeepingTaskModel.find()
@@ -23,31 +27,4 @@ class Filter {
     query() {
         return this.query_
     }
-
-
-}
-
-export class FilterBuilder {
-    params: { [index: string]: any }
-    filters: Array<string>
-
-    constructor() {
-        this.params = {}
-        this.filters = []
-    }
-
-    which(key: string, value: any[]) {
-
-        if (value.length === 0)
-            return this
-
-        this.params[key] = { key: key, value: value };
-        this.filters.push(key)
-        return this
-    }
-
-    build() {
-        return new Filter(this.params)
-    }
-
 }
