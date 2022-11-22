@@ -87,7 +87,41 @@ class HousekeepingController {
      * Get the tasks from the database by filter : RoomType, RoomStatus, Condition, FrontdeskStatus, AssignedEmployeeId.
      * Filter can be multiple values.
      */
-    public static async getHousekeepingTasksFilter(req: Request, res: Response) {
+    static async getHousekeepingTasksFilter(req: Request, res: Response) {
+        /**
+         * This FILTER_KEYS is used to unpack parameters from request body
+         * 
+         * Add new filter to this array to get more specific filter.
+         * 
+        */
+        const FILTER_KEYS = [
+            "type",
+            "roomStatus",
+            "condition",
+            "frontdeskStatus",
+            "employeeId",
+        ]
+        /*
+        * Filter by conditions.
+        * type := ex.["beh","sup"] (multiple values)
+        * roomStatus := ex.["vacant"] (multiple values)
+        * condition := ex.["clean"] (multiple values)
+        * frontdeskStatus := ex.["not-reserved","check-out"](multiple values) 
+        * employeeId := ex.[] or ["637112d403e528adbec62822","6370ba7976b201aea7853104"](multiple values) 
+        * 
+        */
+
+
+        /**
+         * 
+         * Builder design pattern is applied here.
+         * 
+         * Use FilterBuilder to build Filter object 
+         * which is used to query the housekeeping tasks from db
+         * in filter funcion in housekeeping.ts
+         * 
+        */
+
         try {
             // Unpack params from req.body
             let filters: any[] = []
