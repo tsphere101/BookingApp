@@ -40,6 +40,36 @@ class HousekeepingController {
     }
 
     /**
+     * Change the employee who has the responsibility for the specified task id (_id). 
+     */
+    static async changeAssignedTo(req: Request, res: Response) {
+        try {
+            const employeeId = req.body.employeeId // body.assigned to should contains employeeId
+            const taskId = req.body.taskId
+            const updatedTask = await Housekeeping.changeAssignedTo(taskId, employeeId)
+            res.json(updatedTask)
+        } catch (error) {
+            console.log(error)
+            res.send("API error")
+        }
+    }
+
+    /**
+     * Change doNotDisturb status for the specified task id (_id).
+     */
+    static async changeDoNotDisturb(req: Request, res: Response) {
+        try {
+            const doNotDisturb = req.body.doNotDisturb
+            const taskId = req.body.taskId
+            const updatedTask = await Housekeeping.changeDoNotDisturb(taskId, doNotDisturb)
+            res.json(updatedTask)
+        } catch (error) {
+            console.log(error)
+            res.send("API error")
+        }
+    }
+
+    /**
      * Get all housekeeping tasks from database.
      */
     static async getHousekeepingTasks(req: Request, res: Response) {
