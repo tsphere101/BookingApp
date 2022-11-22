@@ -20,4 +20,5 @@ export interface IReservationSchema{
     discount: number
     totalPrice: number
     book_date: Date
+    status : string
 }

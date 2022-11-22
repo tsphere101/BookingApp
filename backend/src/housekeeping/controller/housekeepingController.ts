@@ -10,7 +10,7 @@ class HousekeepingController {
     /**
      * Create a new housekeeping task and save to database.
      */
-    static async addHousekeepingTask(req: Request, res: Response) {
+    public static async addHousekeepingTask(req: Request, res: Response) {
         // console.log(`adding housekeepingtask..`)
         try {
             const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
@@ -26,7 +26,7 @@ class HousekeepingController {
     /**
      * Change the condition of the existed housekeeping task : ex. [Clean, Dirty] 
      */
-    static async changeTaskCondition(req: Request, res: Response) {
+    public static async changeTaskCondition(req: Request, res: Response) {
         // console.log(`changing task ${req.body._id}'s condition`)
         try {
             // const housekeepingTaskObject = housekeepingTaskBuilder.make(req)
@@ -72,7 +72,7 @@ class HousekeepingController {
     /**
      * Get all housekeeping tasks from database.
      */
-    static async getHousekeepingTasks(req: Request, res: Response) {
+    public static async getHousekeepingTasks(req: Request, res: Response) {
         try {
             const housekeepingTasks = await housekeepingTaskModel.find()
             res.json(housekeepingTasks)
@@ -87,41 +87,7 @@ class HousekeepingController {
      * Get the tasks from the database by filter : RoomType, RoomStatus, Condition, FrontdeskStatus, AssignedEmployeeId.
      * Filter can be multiple values.
      */
-    static async getHousekeepingTasksFilter(req: Request, res: Response) {
-        /**
-         * This FILTER_KEYS is used to unpack parameters from request body
-         * 
-         * Add new filter to this array to get more specific filter.
-         * 
-        */
-        const FILTER_KEYS = [
-            "type",
-            "roomStatus",
-            "condition",
-            "frontdeskStatus",
-            "employeeId",
-        ]
-        /*
-        * Filter by conditions.
-        * type := ex.["beh","sup"] (multiple values)
-        * roomStatus := ex.["vacant"] (multiple values)
-        * condition := ex.["clean"] (multiple values)
-        * frontdeskStatus := ex.["not-reserved","check-out"](multiple values) 
-        * employeeId := ex.[] or ["637112d403e528adbec62822","6370ba7976b201aea7853104"](multiple values) 
-        * 
-        */
-
-
-        /**
-         * 
-         * Builder design pattern is applied here.
-         * 
-         * Use FilterBuilder to build Filter object 
-         * which is used to query the housekeeping tasks from db
-         * in filter funcion in housekeeping.ts
-         * 
-        */
-
+    public static async getHousekeepingTasksFilter(req: Request, res: Response) {
         try {
             // Unpack params from req.body
             let filters: any[] = []
@@ -156,7 +122,7 @@ class HousekeepingController {
     /**
      * Get the employees who has the role "housekeeper" from the database.
      */
-    static async getHousekeepers(req: Request, res: Response) {
+    public static async getHousekeepers(req: Request, res: Response) {
         try {
             const housekeepers = await Employees.find({ role: "housekeeper" }).exec()
             res.json(housekeepers)
@@ -170,7 +136,7 @@ class HousekeepingController {
     /**
      * Edit the comment of the housekeeping task on the given _id 
      */
-    static async editHousekeepingTaskComment(req: Request, res: Response) {
+    public static async editHousekeepingTaskComment(req: Request, res: Response) {
         try {
             const taskId = req.body._id
             const newComment = req.body.comment
@@ -186,7 +152,7 @@ class HousekeepingController {
     /**
      * Delete the housekeeping task on given _id 
      */
-    static async deleteHousekeepingTask(req: Request, res: Response) {
+    public static async deleteHousekeepingTask(req: Request, res: Response) {
         try {
             const taskId = req.body._id
             const deleted = await Housekeeping.deleteTask(taskId)

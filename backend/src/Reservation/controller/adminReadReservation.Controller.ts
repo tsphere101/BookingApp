@@ -5,7 +5,7 @@ import { model,Types} from 'mongoose'
 const ReservationsModel = require('../schema/reservationSchema')
 
 class AdminReadReservation{
-    static async readReservation(req:Request,res:Response){
+    public static async readReservation(req:Request,res:Response){
         try {
             const { id } = req.body
             const foundReservation = await ReservationsModel.findOne({"_id":new Types.ObjectId(id)})

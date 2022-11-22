@@ -32,7 +32,7 @@ export class Customer{
         this.status = status
     }
 
-    async saveToDB(){
+    public async saveToDB(){
         try {
             const customer = new customerModel({
                 "prefix": this.prefix,
@@ -53,7 +53,7 @@ export class Customer{
         }
     }
 
-    static async isCustomerExist(fname:string,lname:string,email:string){
+    public static async isCustomerExist(fname:string,lname:string,email:string){
         try {
             const isExist = await customerModel.find({
                 fname: fname,

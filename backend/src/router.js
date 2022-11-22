@@ -15,6 +15,8 @@ import { sendEmail } from './mail/clientReservationConfirm'
 
 const CustomerController = require('./Customer/controller/customerController')
 
+const EventReservationController = require('./Reservation/controller/EventReservationController')
+
 
 
 //Room----------------------------------------------------------------------------------------
@@ -61,6 +63,8 @@ router.route('/admin/guest').post(CustomerController.addCustomer)
 router.route('/admin/guest').get(CustomerController.customerList)
 router.route('/admin/guest/reservation').get(CustomerController.customerReservation)
 router.route('/admin/guest/country').get(CustomerController.customerCountry)
+
+
 
 //Send Email
 router.route('/admin/sendmail').post(sendEmail)

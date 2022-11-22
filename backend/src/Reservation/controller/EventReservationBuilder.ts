@@ -6,7 +6,11 @@ import { EventReservation } from "../class/eventReservation"
 
 
 export class EventReservationBuilder extends ReservationFactory{
-    async makeReservation(req:Request){
+    
+    //reservationController -> สร้าง EventReservationBuilder.makeReservation(req) -> สร้าง EventReservationObj -> EventReservationObj -> EventReservationObj.save()
+    //
+
+    public async makeReservation(req:Request){
         try {
             const { 
                 prefix,

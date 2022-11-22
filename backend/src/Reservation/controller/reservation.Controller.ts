@@ -9,11 +9,11 @@ import { EventReservationBuilder } from './EventReservationBuilder'
 
 const CustomerController = require('../../Customer/controller/customerController')
 
+
+
 class ReservationController{
 
-    
-
-    static async addReservation(req:Request,res:Response){
+    public static async addReservation(req:Request,res:Response){
         try {
 
             const roomBuilder = new RoomReservationBuilder()
@@ -23,7 +23,7 @@ class ReservationController{
                 console.log(roomAdded)
                 const addedCustomer = await CustomerController.addCustomer(req)
             }
-
+    
             res.json(roomAdded)
         } catch (error) {
             console.log(error)
@@ -31,7 +31,7 @@ class ReservationController{
         }
     }
 
-    static async addEventReservation(req:Request,res:Response){
+    public static async addEventReservation(req:Request,res:Response){
         // POST : /api/reservation/event
         console.log("addEventReservation::reservation.Controller")
         try {
@@ -56,7 +56,7 @@ class ReservationController{
 
 
 
-    static async findEmptyRoomByDate(req:Request,res:Response){
+    public static async findEmptyRoomByDate(req:Request,res:Response){
         try {
             const { checkIn , checkOut , guest} = req.body
 
@@ -84,7 +84,7 @@ class ReservationController{
         
     }
 
-    static async findRoomAvaliableInDateReturnID(checkIn:Date , checkOut:Date, roomType:string){
+    public static async findRoomAvaliableInDateReturnID(checkIn:Date , checkOut:Date, roomType:string){
         const roomFilterType = await Rooms.find({"roomName":roomType})
 
         console.log(roomFilterType)
@@ -116,7 +116,7 @@ class ReservationController{
 
     }
 
-    static filterRoomName(guest:number): string[]{
+    public static filterRoomName(guest:number): string[]{
         let filtedRoomName: any[] = []
         if(guest <= 2){
             //filter: "Superior Room" "Deluxe Room" "Beach House" "Family Premium"
@@ -131,7 +131,7 @@ class ReservationController{
         return filtedRoomName
     }
 
-    static async findFullRoom(req:Request,res:Response){
+    public static async findFullRoom(req:Request,res:Response){
         //GET : /booking/full_room
         //https://www.mongodb.com/community/forums/t/group-by-year-month/102514/7
         try {
@@ -145,16 +145,14 @@ class ReservationController{
             )
             
             console.log(test)
-            // const roomFullDate={
-            //     "roomFullDate": numberOfRoom
-            // }
-            // res.json(roomFullDate.toJSON())
             
         } catch (error) {
             console.log(error)
             res.send("API error").status(500)
         }
     }
+
+    
 
 
 

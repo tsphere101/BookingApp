@@ -13,4 +13,6 @@ export interface IEventReservationSchema{
     addition:string
     start: Date
     end: Date
+    status: string
+    type: string
 }

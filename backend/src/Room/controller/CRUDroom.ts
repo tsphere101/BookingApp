@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 const Rooms = require("../schema/roomSchema")
 
 class CRUDroom{
-    static async addRoom(req:Request, res:Response){
+    public static async addRoom(req:Request, res:Response){
         try {
             // const roomData = require('../../data/room.json')
             const roomData = require('../../data/room.json')

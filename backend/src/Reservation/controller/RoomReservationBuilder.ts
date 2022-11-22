@@ -67,7 +67,8 @@ export class RoomReservationBuilder extends ReservationFactory{
                 guest.child,
                 roomForAdd.roomNumber,
                 roomPrice,
-                totalPrice
+                totalPrice,
+                "Confirmed"
             )
             
             const addedRoomReservation = await roomReservationObject.saveToDB()
@@ -89,7 +90,7 @@ export class RoomReservationBuilder extends ReservationFactory{
 
     
 
-    static async findRoomAvaliableInDateReturnID(checkIn:Date , checkOut:Date, roomType:string){
+    public static async findRoomAvaliableInDateReturnID(checkIn:Date , checkOut:Date, roomType:string){
         const roomFilterType = await Rooms.find({"roomName":roomType})
 
         console.log(roomFilterType)
@@ -115,7 +116,7 @@ export class RoomReservationBuilder extends ReservationFactory{
 
     }
 
-    static filterRoomName(guest:number): string[]{
+    public static filterRoomName(guest:number): string[]{
         let filtedRoomName: any[] = []
         if(guest <= 2){
             //filter: "Superior Room" "Deluxe Room" "Beach House" "Family Premium"

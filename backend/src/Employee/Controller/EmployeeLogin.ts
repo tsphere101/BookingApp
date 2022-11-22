@@ -8,7 +8,7 @@ import { Request, Response } from 'express';
 const Employees = require('../schema/EmployeeSchema')
 
 class EmployeeLogin{
-    static async login(req:Request,res:Response){
+  public static async login(req:Request,res:Response){
         try {
             const { username , password } = req.body
 
@@ -47,7 +47,7 @@ class EmployeeLogin{
         }
     }
 
-    static verifyTokenGetUserID(token:string) {
+    public static verifyTokenGetUserID(token:string) {
         try {
           const decoded = jsonwebtoken.verify(token, process.env.TOKEN_KEY);
           return decoded.user_id;
