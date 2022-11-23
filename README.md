@@ -14,3 +14,5 @@
 2. ระบบการจัดการสถานะของห้องพัก (Front-desk operations ) 
 3. ระบบให้บริการแม่บ้าน (Housekeeping) 
 4. ระบบจัดการข้อมูลที่เกี่ยวข้องกับลูกค้า (Customer data management) 
+
+รายงาน -> https://github.com/tsphere101/BookingApp/blob/new-main/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99.pdf
